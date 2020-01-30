@@ -1,6 +1,6 @@
 function manPage() {
   const content =
-`Usage: node GenerateComponent/index.js <componentName> <args>
+`Usage: make-comp <componentName> -<args>
 
 Naming your components: All component files are generated with start case,
             whereas the folder for the component will be lower
@@ -49,13 +49,13 @@ Arguments:  Preceed your arguments with '-'. '--' are ignored. All
 
 Common Combinations:
 
-1. modal -Atn  ~ Generates all component files and folders as
-                 react native / TypeScript files.
+1. make-comp modal -Atn  ~ Generates all component files and folders as
+                           react native / TypeScript files.
 
-2. modal -Du   ~ Generates the component as a react web component
-                 inside of a folder with a utils file.
+2. make-comp modal -Du   ~ Generates the component as a react web component
+                           inside of a folder with a utils file.
 
-3. modal -S    ~ Generates a single react web component.
+3. make-comp modal -S    ~ Generates a single react web component.
 `;
   return content;
 }

@@ -1,6 +1,6 @@
 {
   "name": "make-react-component",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Generate react and react-native components.",
   "main": "index.js",
   "repository": "https://github.com/lvstross/make-react-component",
