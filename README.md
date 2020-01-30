@@ -30,11 +30,11 @@ Here are it's full list of features so far:
 
 ## Usage
 
-`make-comp` is the starting command
+`makeReact` is the starting command
 
 To see the full list of possible arguments and details, run:
 ```
-~ make-comp --help
+~ makeReact --help
 ```
 
 There are essentially two types of arguments so far.
@@ -45,12 +45,12 @@ There are essentially two types of arguments so far.
 
 Generate all possible files inside a folder with test files as TypeScript React Native files. If you don't specify `-t` or `-n`, it will generate your files as `.js` React web files.
 ```
-~ make-comp modal -A -tn
+~ makeReact modal -A -tn
 ```
 
 Generate a single react component.
 ```
-~ make-comp modal -S
+~ makeReact modal -S
 ```
 
 ## Current conventions that will be fixed

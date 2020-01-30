@@ -60,8 +60,8 @@ function interpretArguments(arguments) {
 
   // Require at least one argument.
   if (arguments.length === 0) {
-    console.log('Error: Missing argument. Please provide at least one agrument.');
-    console.log('run with --help to get full list of arguments.');
+    console.log('Missing arguments: Please provide at least one agrument.');
+    console.log('Run makeReact --help to get a full list of arguments.');
     process.exit();
   }
 
