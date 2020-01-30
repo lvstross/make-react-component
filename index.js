@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const fs = require('fs');
+const chalk = require('chalk');
 const {
   testNodeVersion,
   getComponentName,
@@ -57,7 +58,7 @@ if (args.singleFile) {
 // Generate the component directory
 if (args.directory && !fs.existsSync(dirName)) {
   fs.mkdirSync(dirName);
-  console.log(`${dirName} directory was created`);
+  console.log(chalk.white.dim(`${dirName} directory was created`));
 }
 
 // Generate the test directory
@@ -65,7 +66,7 @@ const testDir = `${dirName}/__tests__`;
 
 if ((args.directory && args.testDirectory) && !fs.existsSync(testDir)) {
   fs.mkdirSync(testDir);
-  console.log(`${testDir} test directory was created`);
+  console.log(chalk.white.dim(`${testDir} test directory was created`));
 }
 
 if (args.directory) {

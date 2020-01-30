@@ -1,10 +1,11 @@
+const chalk = require('chalk');
 const manPage = require('./manPage.js');
 
 function testNodeVersion() {
   const nodeVersion = process.versions.node.split('.')[0];
 
-  if (Number(nodeVersion) < 10) {
-    console.log('Please upgrade node version to 10 or higher.');
+  if (Number(nodeVersion) < 8) {
+    console.log(chalk.yellow('Warning: Node version 8 or higher is required.'));
     process.exit();
   }
 }
@@ -13,8 +14,8 @@ function getComponentName() {
   const componentName = process.argv[2] ? process.argv[2] : 'component';
 
   if (componentName.includes('-')) {
-    console.log('Please pass your component name as the first argument.');
-    console.log('Example: ~ componentName -abc');
+    console.log(chalk.yellow('Please pass your component name as the first argument.'));
+    console.log(chalk.yellow(`Example: ${chalk.italic('~ makeReact modal -abc')}`));
     process.exit();
   }
   return componentName
@@ -26,7 +27,7 @@ function getManPage() {
   });
   if (findHelp) {
     console.clear();
-    console.log(manPage());
+    console.log(chalk.green(manPage()));
     process.exit();
   }
 }
@@ -50,8 +51,11 @@ function getArguments() {
 
 function handler(output) {
   return (err) => {
-    if (err) throw err;
-    console.log(output);
+    if (err) {
+      console.log(chalk.red.bold(err));
+      process.exit();
+    };
+    console.log(chalk.white.dim(output));
   }
 }
 
@@ -60,8 +64,8 @@ function interpretArguments(arguments) {
 
   // Require at least one argument.
   if (arguments.length === 0) {
-    console.log('Missing arguments: Please provide at least one agrument.');
-    console.log('Run makeReact --help to get a full list of arguments.');
+    console.log(chalk.yellow('Missing arguments: Please provide at least one agrument.'));
+    console.log(chalk.yellow(`Run ${chalk.italic('makeReact --help')} to get a full list of arguments.`));
     process.exit();
   }
 
