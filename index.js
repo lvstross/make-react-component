@@ -24,7 +24,6 @@ const {
 
 // *** CHECK NODE VERSION ***
 
-// Version 10 or higher is required
 testNodeVersion();
 
 // *** GET COMPONENT NAME AND ARGUMENTS ***

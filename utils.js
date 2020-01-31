@@ -73,7 +73,7 @@ function interpretArguments(arguments) {
   const SINGLE_FILE = arguments.includes('S');
   // generate all folders and files for component
   const ALL = arguments.includes('A');
-  // generate component was a folder
+  // generate component as a folder
   const DIRECTORY = arguments.includes('D');
   // generate component test folder
   const TEST_DIRECTORY = arguments.includes('T');
@@ -87,13 +87,11 @@ function interpretArguments(arguments) {
   // generate styles file
   const STYLE = arguments.includes('s');
 
-  // *** EXTENSION ARGUMENTS ***
+  // *** PLATFORM ARGUMENTS ***
 
   // generate files as ts, js by default
   const TS = arguments.includes('t');
   const ext = TS ? 'ts' : 'js';
-
-  // *** PLATFORM ARGUMENTS ***
 
   // generate files as react native, react by default
   const NATIVE = arguments.includes('n');
