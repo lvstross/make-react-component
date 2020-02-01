@@ -8,6 +8,7 @@ const {
   handler,
   interpretArguments,
   getManPage,
+  confirmDirectory,
 } = require('./utils.js');
 const {
   generateDataLayerFile,
@@ -37,14 +38,15 @@ const args = interpretArguments(arguments);
 
 const dirName = `${process.env.INIT_CWD || process.env.PWD}/${componentName}`;
 const fileName = `${componentName[0].toUpperCase()}${componentName.substr(1)}`;
+const casedFileName = args.lowerCase ? fileName.toLowerCase() : fileName;
 
 // *** GENERATE SINGLE COMPONENT FILE ***
 
-if (args.singleFile) {
-  const singleFile = `${componentName}.${args.ext}`;
+if (args.singleFile && !args.directory) {
+  const singleFile = `${casedFileName}.${args.ext}`;
   const generator = args.native
-    ? generateSingleReactNativeFile(fileName)
-    : generateSingleReactFile(fileName);
+    ? generateSingleReactNativeFile(fileName, args)
+    : generateSingleReactFile(fileName, args);
   fs.writeFile(
     singleFile,
     generator,
@@ -61,7 +63,7 @@ if (args.directory && !fs.existsSync(dirName)) {
 }
 
 // Generate the test directory
-const testDir = `${dirName}/__tests__`;
+const testDir = confirmDirectory(args, dirName, `__tests__`);
 
 if ((args.directory && args.testDirectory) && !fs.existsSync(testDir)) {
   fs.mkdirSync(testDir);
@@ -78,7 +80,7 @@ if (args.directory) {
   );
 
   // Generate the main file
-  const mainFile = `${dirName}/${fileName}.${args.ext}`;
+  const mainFile = confirmDirectory(args, dirName, `${casedFileName}.${args.ext}`);
   const generator = args.native
     ? generateReactNativeMainFile(fileName, args)
     : generateReactMainFile(fileName, args);
@@ -91,7 +93,7 @@ if (args.directory) {
 
 if (args.testDirectory) {
   // Generate the main test file
-  const mainTestFile = `${testDir}/${fileName}.test.${args.ext}`;
+  const mainTestFile = `${testDir}/${casedFileName}.test.${args.ext}`;
   fs.writeFile(
     mainTestFile,
     generateMainTestFile(fileName, args),
@@ -100,8 +102,8 @@ if (args.testDirectory) {
 }
 
 // Generate the data layer file
-if (args.dataLayer && args.directory) {
-  const dataLayerFile = `${dirName}/${fileName}.dataLayer.${args.ext}`;
+if (args.dataLayer) {
+  const dataLayerFile = confirmDirectory(args, dirName, `${casedFileName}.dataLayer.${args.ext}`);
   fs.writeFile(
     dataLayerFile,
     generateDataLayerFile(fileName, args),
@@ -110,12 +112,12 @@ if (args.dataLayer && args.directory) {
 }
 
 // Generate the utils file
-if (args.utils && args.directory) {
-  const utilsFile = `${dirName}/${fileName}.utils.${args.ext}`;
+if (args.utils) {
+  const utilsFile = confirmDirectory(args, dirName, `${casedFileName}.utils.${args.ext}`);
   fs.writeFile(utilsFile, '', handler(`${utilsFile} was created.`));
   // Generate the utils test file
   if (args.testDirectory) {
-    const utilsTestFile = `${testDir}/${fileName}.utils.test.${args.ext}`;
+    const utilsTestFile = `${testDir}/${casedFileName}.utils.test.${args.ext}`;
     fs.writeFile(
       utilsTestFile,
       generateUtilsTestFile(fileName),
@@ -125,8 +127,8 @@ if (args.utils && args.directory) {
 }
 
 // Generate the style file
-if (args.style && args.directory) {
-  const styleFile = `${dirName}/${fileName}.style.${args.ext}`;
+if (args.style) {
+  const styleFile = confirmDirectory(args, dirName, `${casedFileName}.style.${args.ext}`);
   const generator = args.native
     ? generateReactNativeStyleFile(fileName, args)
     : generateReactStyleFile(fileName, args);

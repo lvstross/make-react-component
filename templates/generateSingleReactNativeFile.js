@@ -1,13 +1,17 @@
-function generateSingleReactNativeFile(fileName) {
+const { renderString } = require('../utils.js');
+
+function generateSingleReactNativeFile(fileName, args) {
+  const renderTs = args.ext === 'ts';
   const content =
 `import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export interface Props {
-  text?: string;
-}
-
-function ${fileName}({ text }) {
+${renderString(
+  renderTs,
+  `export interface ${fileName}Props {
+  text: string;
+}`)}
+function ${fileName}({ text }${renderString(renderTs, `: ${fileName}Props`)}) {
   return (
     <View style={styles.root}>
       <Text>{text}</Text>

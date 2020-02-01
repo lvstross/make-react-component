@@ -3,7 +3,7 @@ function manPage() {
 `Usage: makeReact <componentName> -<args>
 
 Naming your components: All component files are generated with start case,
-            whereas the folder for the component will be lower
+            by default whereas the folder for the component will be lower
             case. Example: modal => Modal
 
 Arguments:  Preceed your arguments with '-'. '--' are ignored. All
@@ -24,6 +24,10 @@ Arguments:  Preceed your arguments with '-'. '--' are ignored. All
 
 -T:         Everything -D does as well as generate a test folder
             along with a test file for you component.
+
+-l:         Will generate all of your files as lowercase instead
+            of the default uppercase. Code component names will
+            still be generated as uppercase.
 
 -d:         Will generate the component as a folder and will
             generate it with a dataLayer file.

@@ -54,7 +54,7 @@ Generate a single react component.
 ```
 
 ## Current conventions that will be fixed
-1. Right now, if you want to generate a data layer file, util file or style file along with your react component file, it will assume you want to generate those inside of a folder with your main component file. Will make it to where you can generate these files separately with out having to bundle them into one folder.
+1. Right now, if you want to generate a data layer file, util file or style file along with your react component file, it will assume you want to generate those inside of a folder with your main component file. Will make it to where you can generate these files separately with out having to bundle them into one folder. **** FIXED AS OF v1.3.1 ****
 
 2. Right now the style files will assume you use emotion as your styled component library. Will make this more flexible in the future to support other styled component libraries or none at all if desired.
 

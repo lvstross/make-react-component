@@ -1,4 +1,7 @@
-function generateSingleReactFile(fileName) {
+const { renderString } = require('../utils.js');
+
+function generateSingleReactFile(fileName, args) {
+  const renderTs = args.ext === 'ts';
   const content =
 `import React from 'react';
 import PropTypes from 'prop-types';
@@ -10,7 +13,12 @@ const Container = styled.div({
   },
 });
 
-function ${fileName}({ text }) {
+${renderString(
+  renderTs,
+  `export interface ${fileName}Props {
+  text: string;
+}`)}
+function ${fileName}({ text }${renderString(renderTs, `: ${fileName}Props`)}) {
   return (
     <Container className="root">
       <p>{text}</p>

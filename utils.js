@@ -59,6 +59,18 @@ function handler(output) {
   }
 }
 
+function renderString(condition, string) {
+  if (condition) return string;
+  return '';
+}
+
+function confirmDirectory(args, dirPath, path) {
+  if (args.directory) {
+    return `${dirPath}/${path}`;
+  }
+  return path;
+}
+
 function interpretArguments(arguments) {
   // *** DIRECTORY ARGUMENTS ***
 
@@ -77,6 +89,8 @@ function interpretArguments(arguments) {
   const DIRECTORY = arguments.includes('D');
   // generate component test folder
   const TEST_DIRECTORY = arguments.includes('T');
+  // generate files with lowercase, uppercase by default
+  const LOWER_CASE = arguments.includes('l');
 
   // *** FILE ARGUMENTS ***
 
@@ -100,11 +114,12 @@ function interpretArguments(arguments) {
   return {
     singleFile: SINGLE_FILE,
     all: ALL,
-    directory: ALL || DIRECTORY || TEST_DIRECTORY || DATALAYER || UTILS || STYLE,
+    directory: ALL || DIRECTORY || TEST_DIRECTORY,
     testDirectory: ALL || TEST_DIRECTORY,
     dataLayer: ALL || DATALAYER,
     utils: ALL || UTILS,
     style: ALL || STYLE,
+    lowerCase: LOWER_CASE,
     ext,
     native: NATIVE,
   };
@@ -117,4 +132,6 @@ module.exports = {
   handler,
   interpretArguments,
   getManPage,
+  renderString,
+  confirmDirectory,
 }

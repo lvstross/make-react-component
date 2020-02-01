@@ -1,22 +1,25 @@
-function generateReactMainFile(fileName, args) {
-  const styleImport = args.style
-    ? `import ${fileName}Style from './${fileName}.style';`
-    : '';
-  const styleComp = args.style
-    ? `<${fileName}Style className="root">
-      <p>{text}</p>
-    </${fileName}Style>`
-    : `<div>
-      <p>{text}</p>
-    </div>`;
+const { renderString } = require('../utils.js');
 
+function generateReactMainFile(fileName, args) {
+  const renderTs = args.ext === 'ts';
   const content =
 `import React from 'react';
-${styleImport}
+${renderString(args.style, `import ${fileName}Style from './${fileName}.style';`)}
 
-function ${fileName}({ text }) {
+${renderString(
+  renderTs,
+  `export interface ${fileName}Props {
+  text: string;
+}`)}
+function ${fileName}({ text }${renderString(renderTs, `: ${fileName}Props`)}) {
   return (
-    ${styleComp}
+    ${args.style
+      ? `<${fileName}Style className="root">
+      <p>{text}</p>
+    </${fileName}Style>`
+      : `<div>
+      <p>{text}</p>
+    </div>`}
   );
 }
 
