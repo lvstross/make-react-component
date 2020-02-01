@@ -1,6 +1,6 @@
 {
   "name": "make-react-component",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Generate react and react-native components.",
   "main": "index.js",
   "repository": "https://github.com/lvstross/make-react-component",
@@ -8,9 +8,13 @@
     "makeReact": "./index.js"
   },
   "keywords": [
+    "make-react-component",
+    "make-react",
+    "make-component",
     "react",
     "react-native",
-    "generate",
+    "generate-react-component",
+    "generate-react",
     "component"
   ],
   "author": "Levi Gonzales",
