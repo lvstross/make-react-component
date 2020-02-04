@@ -36,6 +36,9 @@ function getArguments() {
   const dashGroups = process.argv.filter(arg => {
     return arg.includes('-') && !arg.includes('--');
   });
+  const totalParams = process.argv.filter(arg => {
+    return arg.includes(':');
+  });
   const totalArgs = dashGroups.reduce((acc, curr) => {
     if (curr.includes('-') && curr.length > 1) {
       const currentArgs = curr.split('');
@@ -46,7 +49,10 @@ function getArguments() {
     }
     return acc;
   }, []);
-  return totalArgs;
+  return {
+    totalArgs,
+    totalParams,
+  };
 }
 
 function handler(output) {
@@ -77,6 +83,71 @@ function confirmDirectory(args, dirPath, path) {
     return `${dirPath}/${path}`;
   }
   return path;
+}
+
+function convertNullValues(value) {
+  if (value === 'null') {
+    return null;
+  }
+  return value;
+}
+
+function interpretParams(params) {
+  // *** list of param types ***
+  // @state, @props, @ext
+  //
+  // *** file associators ***
+  // param = file tyle [support]
+  // main = Single file, Main file [@state, @props, @ext]
+  // data = Datalayer file [@state, @props, @ext]
+  // style = Style file [@ext]
+  // util = Util file [@ext]
+  let paramState = {
+    state: {
+      main: {},
+      data: {},
+    },
+    props: {
+      main: {},
+      data: {},
+    },
+    ext: {
+      main: null,
+      data: null,
+      style: null,
+      util: null,
+    }
+  };
+  // @TODO: may need to keep as strings for easier templating
+  // or find a way to take state paramState from key value pair
+  // back to template string value.
+
+  params.forEach(param => {
+    if (param.includes('@state')) {
+      const currentArgs = param.split(':');
+      const commaGroups = currentArgs[2].split(',');
+      commaGroups.forEach(group => {
+        const keyValue = group.split('=');
+        paramState.state[currentArgs[1]][keyValue[0]] = convertNullValues(keyValue[1]);
+      });
+      return;
+    }
+    if (param.includes('@props')) {
+      const currentArgs = param.split(':');
+      const commaGroups = currentArgs[2].split(',');
+      commaGroups.forEach(group => {
+        const keyValue = group.split('=');
+        paramState.props[currentArgs[1]][keyValue[0]] = convertNullValues(keyValue[1]);
+      });
+      return;
+    }
+    if (param.includes('@ext')) {
+      const currentArgs = param.split(':');
+      paramState.ext[currentArgs[1]] = currentArgs[2];
+      return;
+    }
+  });
+  return paramState;
 }
 
 function interpretArguments(arguments) {
@@ -146,4 +217,5 @@ module.exports = {
   renderString,
   confirmDirectory,
   newLine,
+  interpretParams,
 }
