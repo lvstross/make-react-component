@@ -64,6 +64,14 @@ function renderString(condition, string) {
   return '';
 }
 
+function newLine(condition) {
+  if (condition) {
+    return `
+`;
+  }
+  return '';
+}
+
 function confirmDirectory(args, dirPath, path) {
   if (args.directory) {
     return `${dirPath}/${path}`;
@@ -91,6 +99,8 @@ function interpretArguments(arguments) {
   const TEST_DIRECTORY = arguments.includes('T');
   // generate files with lowercase, uppercase by default
   const LOWER_CASE = arguments.includes('l');
+  //generate files as classes, functional by default
+  const CLASSES = arguments.includes('c');
 
   // *** FILE ARGUMENTS ***
 
@@ -112,16 +122,17 @@ function interpretArguments(arguments) {
 
 
   return {
-    singleFile: SINGLE_FILE,
     all: ALL,
-    directory: ALL || DIRECTORY || TEST_DIRECTORY,
-    testDirectory: ALL || TEST_DIRECTORY,
+    classes: CLASSES,
     dataLayer: ALL || DATALAYER,
-    utils: ALL || UTILS,
-    style: ALL || STYLE,
-    lowerCase: LOWER_CASE,
+    directory: ALL || DIRECTORY || TEST_DIRECTORY,
     ext,
+    lowerCase: LOWER_CASE,
     native: NATIVE,
+    singleFile: SINGLE_FILE,
+    style: ALL || STYLE,
+    testDirectory: ALL || TEST_DIRECTORY,
+    utils: ALL || UTILS,
   };
 }
 
@@ -134,4 +145,5 @@ module.exports = {
   getManPage,
   renderString,
   confirmDirectory,
+  newLine,
 }

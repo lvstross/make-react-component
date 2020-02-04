@@ -29,6 +29,9 @@ Arguments:  Preceed your arguments with '-'. '--' are ignored. All
             of the default uppercase. Code component names will
             still be generated as uppercase.
 
+-c:         Will generate all of your files as classes. Functional
+            components are the default.
+
 -d:         Will generate the component as a folder and will
             generate it with a dataLayer file.
 
@@ -60,6 +63,10 @@ Common Combinations:
                            inside of a folder with a utils file.
 
 3. makeReact modal -S    ~ Generates a single react web component.
+
+4. makeReact modal -Dc   ~ Generates a single component file in a folder with
+                           an index file. Component is generated as a class
+                           component.
 `;
   return content;
 }

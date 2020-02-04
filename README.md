@@ -7,20 +7,21 @@ Generate react and react-native components.
 If you search npm, you'll find many packages that do just about the same thing. Many have come before this one and built tools that generate your react components just fine. What makes this one different is that it seeks to simply do more.
 
 ## Features
-
-Here are it's full list of features so far:
-
+Here are the full list of features so far:
 1. Can generate single file components as well as a folder component.
 2. Can generate as either React or React Native components.
-3. Can generate as either .js or .ts for you TypeScript users.
+3. Can generate as either .js or .ts for TypeScript users.
 4. Can generate a test folder with starter test files.
+5. Can generate both functional components as well as class based components.
 
 ### Features to come:
-1. Can generate both functional components as well as class based components.
+1. Can generate files with custom extensions.
 2. Can generate stateful components with state setters and getters ready to go.
 3. Can generate a redux connected component.
 4. Can generate a react router connected component.
 5. Can generate a HOC component.
+6. Can generate a Graphql/Apollo data layer component.
+7. Can generate all data layer connects onto index file instead of a data layer file.
 
 ## Installation
 
@@ -54,8 +55,6 @@ Generate a single react component.
 ```
 
 ## Current conventions that will be fixed
-1. Right now, if you want to generate a data layer file, util file or style file along with your react component file, it will assume you want to generate those inside of a folder with your main component file. Will make it to where you can generate these files separately with out having to bundle them into one folder. **** FIXED AS OF v1.3.1 ****
+1. Right now the style files will assume you use emotion as your styled component library. Will make this more flexible in the future to support other styled component libraries or none at all if desired.
 
-2. Right now the style files will assume you use emotion as your styled component library. Will make this more flexible in the future to support other styled component libraries or none at all if desired.
-
-3. Right now the tool assumes you will want all of your files generated as either `.js` or `.ts`. Will extend this in the future to support `.jsx` and `.tsx` along with attaching those to the specific file types so that files can have their own extension without an all or nothing approach.
+2. Right now the tool assumes you will want all of your files generated as either `.js` or `.ts`. Will extend this in the future to support `.jsx` and `.tsx` along with attaching those to the specific file types so that files can have their own extension without an all or nothing approach.

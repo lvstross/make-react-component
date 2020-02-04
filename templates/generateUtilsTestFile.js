@@ -1,12 +1,12 @@
 function generateUtilsTestFile(fileName) {
   const content =
-`// import { util } from '../${fileName}.utils';
+`import { util } from '../${fileName}.utils';
 
-// describe('util', () => {
-//   it('description', () => {
-//     //
-//   });
-// });
+describe('util', () => {
+  it('description', () => {
+    //
+  });
+});
 `;
   return content;
 }
