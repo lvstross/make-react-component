@@ -1,10 +1,11 @@
-const { renderString, newLine } = require('../utils.js');
 const {
   genInterface,
   genPropTypes,
   getPropsString,
   getStateString,
   getPropTypesString,
+  newLine,
+  renderString,
 } = require('./utils.js');
 
 function genAsFunction({
@@ -23,7 +24,7 @@ ${args.style
   : "import { StyleSheet, View, Text } from 'react-native';"}
 ${renderString(args.style, `import ${fileName}Style from './${fileName}.style';`)}${newLine(args.style)}
 ${propsInterface}${stateInterface}
-function ${fileName}(${renderString(renderTs, 'props: Props')}) {
+function ${fileName}(${renderString((hasPropTypes && !renderTs), 'props')}${renderString(renderTs, 'props: Props')}) {
   return (
     ${args.style
       ? `<View style={${fileName}Style.root}>

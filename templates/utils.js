@@ -1,5 +1,37 @@
-const { newLine, renderString } = require('../utils.js');
+/**
+ * Render String if the condition is true
+ *
+ * @param {Boolean} condition
+ * @param {String} string
+ * @return {String}
+ */
+function renderString(condition, string) {
+  if (condition) return string;
+  return '';
+}
 
+/**
+ * Render a new line if condition is true
+ *
+ * @param {Boolean} condition
+ * @return {String}
+ */
+function newLine(condition) {
+  if (condition) {
+    return `
+`;
+  }
+  return '';
+}
+
+/**
+ * Generate Interface for TypeScript
+ *
+ * @param {String} name
+ * @param {Boolean} hasParam
+ * @param {String} string
+ * @return {String}
+ */
 function genInterface(name, hasParams, string) {
   return `${renderString(name === 'State', newLine(true))}${hasParams
     ? `interface ${name} {
@@ -8,12 +40,26 @@ function genInterface(name, hasParams, string) {
     : `interface ${name} {}`}${newLine(true)}`;
 }
 
+/**
+ * Generate prop types object
+ *
+ * @param {String} name
+ * @param {String} string
+ * @return {String}
+ */
 function genPropTypes(name, string) {
   return `${newLine(true)}${name}.propTypes = {
   ${string}
 }${newLine(true)}`;
 }
 
+/**
+ * Generate Prop String
+ *
+ * @param {Object} params - paramState
+ * @param {String} key - paramState key
+ * @return {Object}
+ */
 function getPropsString(params, key) {
   let propString = '';
   const hasProps = params.props[key].length > 0;
@@ -33,6 +79,13 @@ function getPropsString(params, key) {
   };
 }
 
+/**
+ * Generate state string
+ *
+ * @param {Object} params - paramState
+ * @param {String} key - paramState key
+ * @return {Object}
+ */
 function getStateString(params, key) {
   let stateString = '';
   const hasState = params.state[key].length > 0;
@@ -52,6 +105,13 @@ function getStateString(params, key) {
   };
 }
 
+/**
+ * Generate prop types string
+ *
+ * @param {Object} params - paramState
+ * @param {String} key - paramState key
+ * @return {Object}
+ */
 function getPropTypesString(params, key) {
   let propTypesString = '';
   const hasPropTypes = params.props[key].length > 0;
@@ -77,4 +137,6 @@ module.exports = {
   getPropsString,
   getStateString,
   getPropTypesString,
+  newLine,
+  renderString,
 }

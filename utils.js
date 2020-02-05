@@ -1,6 +1,11 @@
 const chalk = require('chalk');
 const manPage = require('./manPage.js');
 
+/**
+ * Test if the node version being used is 8 or higher
+ *
+ * @return {void} - console logs warning and exits process if node version fails
+ */
 function testNodeVersion() {
   const nodeVersion = process.versions.node.split('.')[0];
 
@@ -10,6 +15,11 @@ function testNodeVersion() {
   }
 }
 
+/**
+ * Determines the component name
+ *
+ * @return {String} componentName
+ */
 function getComponentName() {
   const componentName = process.argv[2] ? process.argv[2] : 'component';
 
@@ -21,6 +31,11 @@ function getComponentName() {
   return componentName
 }
 
+/**
+ * Get the manual page
+ *
+ * @return {void} - console logs template then exits process
+ */
 function getManPage() {
   const findHelp = process.argv.some(arg => {
     return arg === '--help';
@@ -32,6 +47,11 @@ function getManPage() {
   }
 }
 
+/**
+ * Gets the arguments and params
+ *
+ * @return {Object}
+ */
 function getArguments() {
   const dashGroups = process.argv.filter(arg => {
     return arg.includes('-') && !arg.includes('--');
@@ -55,6 +75,12 @@ function getArguments() {
   };
 }
 
+/**
+ * Handler for file and directory creation
+ *
+ * @param {String} output - the message on success
+ * @return {Function}
+ */
 function handler(output) {
   return (err) => {
     if (err) {
@@ -65,19 +91,14 @@ function handler(output) {
   }
 }
 
-function renderString(condition, string) {
-  if (condition) return string;
-  return '';
-}
-
-function newLine(condition) {
-  if (condition) {
-    return `
-`;
-  }
-  return '';
-}
-
+/**
+ * Checks if component needs to be generated in a directory
+ *
+ * @param {Object} args - arguments
+ * @param {String} dirPath - path of directory
+ * @param {String} path - component path
+ * @return {String}
+ */
 function confirmDirectory(args, dirPath, path) {
   if (args.directory) {
     return `${dirPath}/${path}`;
@@ -85,36 +106,54 @@ function confirmDirectory(args, dirPath, path) {
   return path;
 }
 
-function convertValues(value) {
-  const isNumber = Number(value);
-  if (!Number.isNaN(isNumber) && isNumber !== 0) return isNumber;
-  if (value === 'null') return null;
-  if (value === 'true') return true;
-  if (value === 'false') return false;
-  if (value) return `'${value}'`;
-  return null;
+/**
+ * Converts values to their appropriate primative types
+ *
+ * @param {String} value - value to be converted
+ * @return {Many}
+ */
+function inferTypes(value) {
+  const type = value.toLowerCase();
+  if (type === 'str' || type === 'string') return 'string';
+  if (type === 'num' || type === 'number') return 'number';
+  if (type === 'bool' || type === 'boolean') return 'boolean';
+  if (type === 'obj' || type === 'object') return 'object';
+  if (type === 'arr' || type === 'array') return 'array';
+  if (type === 'any') return 'any';
 }
 
+/**
+ * Infer Prop Types
+ *
+ * @param {String} value - value whos type is to be infered
+ * @return {String} - infered prop type
+ */
 function inferPropTypes(value) {
-  const isNumber = Number(value);
-  const asString = 'PropTypes.string';
-  if (!Number.isNaN(isNumber) && isNumber !== 0) return 'PropTypes.number';
-  if (value === 'null') return asString;
-  if (value === 'true' || value === 'false') return 'PropTypes.bool';
-  if (value) return asString;
-  return asString;
+  const type = value.toLowerCase();
+  if (type === 'str' || type === 'string') return 'PropTypes.string';
+  if (type === 'num' || type === 'number') return 'PropTypes.number';
+  if (type === 'bool' || type === 'boolean') return 'PropTypes.boolean';
+  if (type === 'obj' || type === 'object') return 'PropTypes.object';
+  if (type === 'arr' || type === 'array') return 'PropTypes.array';
+  if (type === 'any') return 'PropTypes.any';
 }
 
+/**
+ * Interpret Params
+ * Param types: @state, @props, @ext
+ *
+ * Files associated:
+ * main = Single or Main file [@state, @props, @ext]
+ * data = Datalayer file [@state, @props, @ext]
+ * style = Style file [@ext]
+ * util = Utils file [@ext]
+ *
+ * @Example: @state:data:id=null,name=levi @props:main:id=null @ext:main:jsx
+ *
+ * @param {Array} params
+ * @return {Object} paramState
+ */
 function interpretParams(params) {
-  // *** list of param types ***
-  // @state, @props, @ext
-  //
-  // *** file associators ***
-  // param = file tyle [support]
-  // main = Single file, Main file [@state, @props, @ext]
-  // data = Datalayer file [@state, @props, @ext]
-  // style = Style file [@ext]
-  // util = Util file [@ext]
   let paramState = {
     state: {
       main: [],
@@ -143,7 +182,7 @@ function interpretParams(params) {
       commaGroups.forEach(group => {
         const keyValue = group.split('=');
         if (paramState.state[currentArgs[1]]) {
-          paramState.state[currentArgs[1]].push(`${keyValue[0]}: ${convertValues(keyValue[1])}`);
+          paramState.state[currentArgs[1]].push(`${keyValue[0]}: ${inferTypes(keyValue[1])}`);
         }
       });
       return;
@@ -154,7 +193,7 @@ function interpretParams(params) {
       commaGroups.forEach(group => {
         const keyValue = group.split('=');
         if (paramState.props[currentArgs[1]]) {
-          paramState.props[currentArgs[1]].push(`${keyValue[0]}: ${convertValues(keyValue[1])}`);
+          paramState.props[currentArgs[1]].push(`${keyValue[0]}: ${inferTypes(keyValue[1])}`);
           paramState.propTypes[currentArgs[1]].push(`${keyValue[0]}: ${inferPropTypes(keyValue[1])}`);
         }
       });
@@ -169,46 +208,54 @@ function interpretParams(params) {
   return paramState;
 }
 
-function interpretArguments(arguments) {
+/**
+ * Interpret Arguments
+ *
+ * @Example: -Atn -DTl
+ *
+ * @param {Array} args
+ * @return {Object}
+ */
+function interpretArguments(args) {
   // *** DIRECTORY ARGUMENTS ***
 
   // Require at least one argument.
-  if (arguments.length === 0) {
+  if (args.length === 0) {
     console.log(chalk.yellow('Missing arguments: Please provide at least one agrument.'));
     console.log(chalk.yellow(`Run ${chalk.italic('makeReact --help')} to get a full list of arguments.`));
     process.exit();
   }
 
   // generate component as single file with no folders
-  const SINGLE_FILE = arguments.includes('S');
+  const SINGLE_FILE = args.includes('S');
   // generate all folders and files for component
-  const ALL = arguments.includes('A');
+  const ALL = args.includes('A');
   // generate component as a folder
-  const DIRECTORY = arguments.includes('D');
+  const DIRECTORY = args.includes('D');
   // generate component test folder
-  const TEST_DIRECTORY = arguments.includes('T');
+  const TEST_DIRECTORY = args.includes('T');
   // generate files with lowercase, uppercase by default
-  const LOWER_CASE = arguments.includes('l');
+  const LOWER_CASE = args.includes('l');
   //generate files as classes, functional by default
-  const CLASSES = arguments.includes('c');
+  const CLASSES = args.includes('c');
 
   // *** FILE ARGUMENTS ***
 
   // generate data layer file
-  const DATALAYER = arguments.includes('d');
+  const DATALAYER = args.includes('d');
   // generate utils file
-  const UTILS = arguments.includes('u');
+  const UTILS = args.includes('u');
   // generate styles file
-  const STYLE = arguments.includes('s');
+  const STYLE = args.includes('s');
 
   // *** PLATFORM ARGUMENTS ***
 
   // generate files as ts, js by default
-  const TS = arguments.includes('t');
+  const TS = args.includes('t');
   const ext = TS ? 'ts' : 'js';
 
   // generate files as react native, react by default
-  const NATIVE = arguments.includes('n');
+  const NATIVE = args.includes('n');
 
 
   return {
@@ -233,8 +280,6 @@ module.exports = {
   handler,
   interpretArguments,
   getManPage,
-  renderString,
   confirmDirectory,
-  newLine,
   interpretParams,
 }

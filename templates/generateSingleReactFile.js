@@ -1,10 +1,11 @@
-const { renderString, newLine } = require('../utils.js');
 const {
   genInterface,
   genPropTypes,
   getPropsString,
   getStateString,
   getPropTypesString,
+  newLine,
+  renderString,
 } = require('./utils.js');
 
 function genAsFunction({
@@ -25,7 +26,7 @@ const Container = styled.div({
   },
 });${newLine(renderTs)}
 ${propsInterface}${stateInterface}
-function ${fileName}(${renderString(renderTs, 'props: Props')}) {
+function ${fileName}(${renderString((hasPropTypes && !renderTs), 'props')}${renderString(renderTs, 'props: Props')}) {
   return (
     <Container className="root">
       <p>${fileName} component</p>

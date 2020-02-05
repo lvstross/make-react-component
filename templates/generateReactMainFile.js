@@ -1,10 +1,11 @@
-const { renderString, newLine } = require('../utils.js');
 const {
   genInterface,
   genPropTypes,
   getPropsString,
   getStateString,
   getPropTypesString,
+  newLine,
+  renderString,
 } = require('./utils.js');
 
 function genAsFunction({
@@ -20,7 +21,7 @@ function genAsFunction({
 `import React from 'react';${renderString((hasPropTypes && !renderTs), `${newLine(true)}import PropTypes from 'prop-types';`)}
 ${renderString(args.style, `import ${fileName}Style from './${fileName}.style';`)}${newLine(args.style)}
 ${propsInterface}${stateInterface}
-function ${fileName}(${renderString(renderTs, 'props: Props')}) {
+function ${fileName}(${renderString((hasPropTypes && !renderTs), 'props')}${renderString(renderTs, 'props: Props')}) {
   return (
     ${args.style
       ? `<${fileName}Style className="root">

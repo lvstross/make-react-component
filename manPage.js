@@ -54,19 +54,50 @@ Arguments:  Preceed your arguments with '-'. '--' are ignored. All
             will make them all react native files instead with
             react native components and styles.
 
-Common Combinations:
+Parameters: Used to customize file extensions and pass state and
+            props to components.
 
-1. makeReact modal -Atn  ~ Generates all component files and folders as
-                           react native / TypeScript files.
+Full example: makeReact componentName -A @state:main:isOpen=bool
+              @props:data:id=str @ext:main:jsx
 
-2. makeReact modal -Du   ~ Generates the component as a react web component
-                           inside of a folder with a utils file.
+                 ***** PARAMETER TYPES ******
 
-3. makeReact modal -S    ~ Generates a single react web component.
+@state:     Passes state parameters to your components. Only works
+            for data layer files and main files.
 
-4. makeReact modal -Dc   ~ Generates a single component file in a folder with
-                           an index file. Component is generated as a class
-                           component.
+@props:     Passes prop parameters to your components. Only works
+            for data layer files and main files.
+
+@ext:       Customizes file extensions. Works for all file types lists
+            below.
+
+                 ***** FILE TYPES ******
+
+:main:      Specifies the single or main file as the parameter
+            receiver.
+
+:data:      Specifies the data layer file as the parameter receiver.
+
+:style:     Specifies the style file as the parameter receiver.
+
+:utils:     Specifies the utils file as the parameter receiver.
+
+                 ***** KEY/VALUES ******
+
+Structure: key=value,key=value
+
+A comma separated, unbroken string of key value pairs that you pass in
+for your state or props parameters. The key can be named anything, but
+the value has to be one of the following type definitions.
+
+String: [str, string]
+Number: [num, number]
+Boolean: [bool, boolean]
+Object: [obj, object]
+Array: [arr, array]
+Any: [any]
+
+Example: firstName=str,age=num,isHappy=bool,interests=obj
 `;
   return content;
 }

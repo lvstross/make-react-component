@@ -1,6 +1,16 @@
 # Change Log
 
-# 1.4.0 (2-4-2020) Latest Version
+# 1.5.0 (2-5-2020) Latest Version
+Added parameters system.
+Added better TypeScript support.
+Can now add state and props to files.
+Can now add custom file extensions to files.
+Made template generation optimizations.
+Added more details and examples to the README file.
+Added more detail to man page.
+Added jsdocs to util functions.
+
+# 1.4.0 (2-4-2020)
 Added the ability to generate files as classes.
 Fixed semantic versioning.
 Added change log file.

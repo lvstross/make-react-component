@@ -1,10 +1,11 @@
-const { renderString, newLine } = require('../utils.js');
 const {
   genInterface,
   genPropTypes,
   getPropsString,
   getStateString,
   getPropTypesString,
+  newLine,
+  renderString,
 } = require('./utils.js');
 
 function genAsFunction({
@@ -21,7 +22,7 @@ function genAsFunction({
 import ${fileName} from './${fileName}';
 
 ${propsInterface}${stateInterface}
-function ${fileName}DataLayer(${renderString(renderTs, 'props: Props')}) {
+function ${fileName}DataLayer(${renderString((hasPropTypes && !renderTs), 'props')}${renderString(renderTs, 'props: Props')}) {
   return (
     <${fileName}/>
   );
