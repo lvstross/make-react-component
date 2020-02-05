@@ -48,8 +48,8 @@ const casedFileName = args.lowerCase ? fileName.toLowerCase() : fileName;
 if (args.singleFile && !args.directory) {
   const singleFile = `${casedFileName}.${params.ext.main || args.ext}`;
   const generator = args.native
-    ? generateSingleReactNativeFile(fileName, args)
-    : generateSingleReactFile(fileName, args);
+    ? generateSingleReactNativeFile(fileName, args, params)
+    : generateSingleReactFile(fileName, args, params);
   fs.writeFile(
     singleFile,
     generator,
@@ -85,8 +85,8 @@ if (args.directory) {
   // Generate the main file
   const mainFile = confirmDirectory(args, dirName, `${casedFileName}.${params.ext.main || args.ext}`);
   const generator = args.native
-    ? generateReactNativeMainFile(fileName, args)
-    : generateReactMainFile(fileName, args);
+    ? generateReactNativeMainFile(fileName, args, params)
+    : generateReactMainFile(fileName, args, params);
   fs.writeFile(
     mainFile,
     generator,

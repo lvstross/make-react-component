@@ -1,19 +1,28 @@
 const { renderString, newLine } = require('../utils.js');
+const {
+  genInterface,
+  genPropTypes,
+  getPropsString,
+  getStateString,
+  getPropTypesString,
+} = require('./utils.js');
 
-function genAsFunction(fileName, args) {
-  const renderTs = args.ext === 'ts';
-  const content =
-`import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';${newLine(renderTs)}
-${renderString(
+function genAsFunction({
+  fileName,
   renderTs,
-  `interface ${fileName}Props {
-  text: string;
-}`)}${newLine(renderTs)}
-function ${fileName}({ text }${renderString(renderTs, `: ${fileName}Props`)}) {
+  propsInterface,
+  stateInterface,
+  hasPropTypes,
+  propTypes,
+}) {
+  const content =
+`import React from 'react';${renderString((hasPropTypes && !renderTs), `${newLine(true)}import PropTypes from 'prop-types';`)}
+import { StyleSheet, Text, View } from 'react-native';${newLine(renderTs)}
+${propsInterface}${stateInterface}
+function ${fileName}(${renderString(renderTs, 'props: Props')}) {
   return (
     <View style={styles.root}>
-      <Text>{text}</Text>
+      <Text>${fileName} component</Text>
     </View>
   );
 }
@@ -26,27 +35,31 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
+${propTypes}
 export default ${fileName};
 `;
   return content;
 }
 
-function genAsClass(fileName, args) {
-  const renderTs = args.ext === 'ts';
-  const content =
-`import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';${newLine(renderTs)}
-${renderString(
+function genAsClass({
+  fileName,
   renderTs,
-  `interface ${fileName}Props {
-  text: string;
-}`)}${newLine(renderTs)}
-class ${fileName} extends Component${renderString(renderTs, `<${fileName}Props>`)} {
+  hasState,
+  propsInterface,
+  stateInterface,
+  hasPropTypes,
+  propTypes,
+}) {
+  const interfaceConnect = renderString(renderTs, `<Props${renderString(hasState, ', State')}>`);
+  const content =
+`import React, { Component } from 'react';${renderString((hasPropTypes && !renderTs), `${newLine(true)}import PropTypes from 'prop-types';`)}
+import { StyleSheet, Text, View } from 'react-native';${newLine(renderTs)}
+${propsInterface}${stateInterface}
+class ${fileName} extends Component${interfaceConnect} {
   render() {
     return (
       <View style={styles.root}>
-        <Text>{text}</Text>
+        <Text>${fileName} component</Text>
       </View>
     );
   }
@@ -60,15 +73,32 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
+${propTypes}
 export default ${fileName};
 `;
   return content;
 }
 
-function generateSingleReactNativeFile(fileName, args) {
-  if (args.classes) return genAsClass(fileName, args);
-  return genAsFunction(fileName, args);
+function generateSingleReactNativeFile(fileName, args, params) {
+  const renderTs = args.ext === 'ts';
+  const { hasProps, propString } = getPropsString(params, 'main');
+  const { hasState, stateString } = getStateString(params, 'main');
+  const { hasPropTypes, propTypesString } = getPropTypesString(params, 'main');
+  const propsInterface = renderString(renderTs, genInterface('Props', hasProps, propString));
+  const stateInterface = renderString((renderTs && hasState), genInterface('State', hasState, stateString));
+  const propTypes = renderString((hasPropTypes && !renderTs), genPropTypes(fileName, propTypesString));
+  const passedArguments = {
+    fileName,
+    args,
+    renderTs,
+    hasState,
+    propsInterface,
+    stateInterface,
+    hasPropTypes,
+    propTypes,
+  };
+  if (args.classes) return genAsClass(passedArguments);
+  return genAsFunction(passedArguments);
 }
 
 module.exports = generateSingleReactNativeFile;

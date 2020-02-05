@@ -88,8 +88,21 @@ function confirmDirectory(args, dirPath, path) {
 function convertValues(value) {
   const isNumber = Number(value);
   if (!Number.isNaN(isNumber) && isNumber !== 0) return isNumber;
+  if (value === 'null') return null;
+  if (value === 'true') return true;
+  if (value === 'false') return false;
   if (value) return `'${value}'`;
   return null;
+}
+
+function inferPropTypes(value) {
+  const isNumber = Number(value);
+  const asString = 'PropTypes.string';
+  if (!Number.isNaN(isNumber) && isNumber !== 0) return 'PropTypes.number';
+  if (value === 'null') return asString;
+  if (value === 'true' || value === 'false') return 'PropTypes.bool';
+  if (value) return asString;
+  return asString;
 }
 
 function interpretParams(params) {
@@ -108,6 +121,10 @@ function interpretParams(params) {
       data: [],
     },
     props: {
+      main: [],
+      data: [],
+    },
+    propTypes: {
       main: [],
       data: [],
     },
@@ -138,6 +155,7 @@ function interpretParams(params) {
         const keyValue = group.split('=');
         if (paramState.props[currentArgs[1]]) {
           paramState.props[currentArgs[1]].push(`${keyValue[0]}: ${convertValues(keyValue[1])}`);
+          paramState.propTypes[currentArgs[1]].push(`${keyValue[0]}: ${inferPropTypes(keyValue[1])}`);
         }
       });
       return;

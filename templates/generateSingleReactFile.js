@@ -1,10 +1,22 @@
 const { renderString, newLine } = require('../utils.js');
+const {
+  genInterface,
+  genPropTypes,
+  getPropsString,
+  getStateString,
+  getPropTypesString,
+} = require('./utils.js');
 
-function genAsFunction(fileName, args) {
-  const renderTs = args.ext === 'ts';
+function genAsFunction({
+  fileName,
+  renderTs,
+  propsInterface,
+  stateInterface,
+  hasPropTypes,
+  propTypes,
+}) {
   const content =
-`import React from 'react';
-import PropTypes from 'prop-types';
+`import React from 'react';${renderString((hasPropTypes && !renderTs), `${newLine(true)}import PropTypes from 'prop-types';`)}
 import styled from '@emotion/styled';
 
 const Container = styled.div({
@@ -12,29 +24,32 @@ const Container = styled.div({
     //
   },
 });${newLine(renderTs)}
-${renderString(
-  renderTs,
-  `interface ${fileName}Props {
-  text: string;
-}`)}${newLine(renderTs)}
-function ${fileName}({ text }${renderString(renderTs, `: ${fileName}Props`)}) {
+${propsInterface}${stateInterface}
+function ${fileName}(${renderString(renderTs, 'props: Props')}) {
   return (
     <Container className="root">
-      <p>{text}</p>
+      <p>${fileName} component</p>
     </Container>
   );
 }
-
+${propTypes}
 export default ${fileName};
 `;
   return content;
 }
 
-function genAsClass(fileName, args) {
-  const renderTs = args.ext === 'ts';
+function genAsClass({
+  fileName,
+  renderTs,
+  hasState,
+  propsInterface,
+  stateInterface,
+  hasPropTypes,
+  propTypes,
+}) {
+  const interfaceConnect = renderString(renderTs, `<Props${renderString(hasState, ', State')}>`);
   const content =
-`import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+`import React, { Component } from 'react';${renderString((hasPropTypes && !renderTs), `${newLine(true)}import PropTypes from 'prop-types';`)}
 import styled from '@emotion/styled';
 
 const Container = styled.div({
@@ -42,29 +57,42 @@ const Container = styled.div({
     //
   },
 });${newLine(renderTs)}
-${renderString(
-  renderTs,
-  `interface ${fileName}Props {
-  text: string;
-}`)}${newLine(renderTs)}
-class ${fileName} extends Component${renderString(renderTs, `<${fileName}Props>`)} {
+${propsInterface}${stateInterface}
+class ${fileName} extends Component${interfaceConnect} {
   render() {
     return (
       <Container className="root">
-        <p>{text}</p>
+        <p>${fileName} component</p>
       </Container>
     );
   }
 }
-
+${propTypes}
 export default ${fileName};
 `;
   return content;
 }
 
-function generateSingleReactFile(fileName, args) {
-  if (args.classes) return genAsClass(fileName, args);
-  return genAsFunction(fileName, args);
+function generateSingleReactFile(fileName, args, params) {
+  const renderTs = args.ext === 'ts';
+  const { hasProps, propString } = getPropsString(params, 'main');
+  const { hasState, stateString } = getStateString(params, 'main');
+  const { hasPropTypes, propTypesString } = getPropTypesString(params, 'main');
+  const propsInterface = renderString(renderTs, genInterface('Props', hasProps, propString));
+  const stateInterface = renderString((renderTs && hasState), genInterface('State', hasState, stateString));
+  const propTypes = renderString((hasPropTypes && !renderTs), genPropTypes(fileName, propTypesString));
+  const passedArguments = {
+    fileName,
+    args,
+    renderTs,
+    hasState,
+    propsInterface,
+    stateInterface,
+    hasPropTypes,
+    propTypes,
+  };
+  if (args.classes) return genAsClass(passedArguments);
+  return genAsFunction(passedArguments);
 }
 
 module.exports = generateSingleReactFile;

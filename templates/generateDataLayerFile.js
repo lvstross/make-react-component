@@ -1,27 +1,32 @@
 const { renderString, newLine } = require('../utils.js');
+const {
+  genInterface,
+  genPropTypes,
+  getPropsString,
+  getStateString,
+  getPropTypesString,
+} = require('./utils.js');
 
 function genAsFunction({
   fileName,
   renderTs,
-  hasProps,
-  propString,
+  hasState,
+  propsInterface,
+  stateInterface,
+  hasPropTypes,
+  propTypes,
 }) {
   const content =
-`import React from 'react';
+`import React from 'react';${renderString((hasPropTypes && !renderTs), `${newLine(true)}import PropTypes from 'prop-types';`)}
 import ${fileName} from './${fileName}';
 
-${hasProps
-  ? renderString(renderTs, `interface Props {
-  ${propString}
-}`)
-  : renderString(renderTs, 'interface Props {}')
-}${newLine(renderTs)}
+${propsInterface}${stateInterface}
 function ${fileName}DataLayer(${renderString(renderTs, 'props: Props')}) {
   return (
-    <${fileName} text="${fileName} component"/>
+    <${fileName}/>
   );
 }
-
+${propTypes}
 export default ${fileName}DataLayer;
 `;
   return content;
@@ -30,27 +35,26 @@ export default ${fileName}DataLayer;
 function genAsClass({
   fileName,
   renderTs,
-  hasProps,
-  propString,
+  hasState,
+  propsInterface,
+  stateInterface,
+  hasPropTypes,
+  propTypes,
 }) {
+  const interfaceConnect = renderString(renderTs, `<Props${renderString(hasState, ', State')}>`);
   const content =
-`import React, { Component } from 'react';
+`import React, { Component } from 'react';${renderString((hasPropTypes && !renderTs), `${newLine(true)}import PropTypes from 'prop-types';`)}
 import ${fileName} from './${fileName}';
 
-${hasProps
-  ? renderString(renderTs, `interface Props {
-  ${propString}
-}`)
-  : renderString(renderTs, 'interface Props {}')
-}${newLine(renderTs)}
-class ${fileName}DataLayer extends Component${renderString(renderTs, '<Props>')} {
+${propsInterface}${stateInterface}
+class ${fileName}DataLayer extends Component${interfaceConnect} {
   render() {
     return (
-      <${fileName} text="${fileName} component"/>
+      <${fileName}/>
     );
   }
 }
-
+${propTypes}
 export default ${fileName}DataLayer;
 `;
   return content;
@@ -58,24 +62,20 @@ export default ${fileName}DataLayer;
 
 function generateDataLayerFile(fileName, args, params) {
   const renderTs = args.ext === 'ts';
-  let propString = '';
-  const hasProps = params.props.data.length > 0;
-  if (hasProps) {
-    params.props.data.forEach((prop, i, arr) => {
-      if (i !== arr.length - 1) {
-          propString += `${prop};
-  `;
-        return;
-      }
-      propString += `${prop};`;
-    });
-  }
+  const { hasProps, propString } = getPropsString(params, 'data');
+  const { hasState, stateString } = getStateString(params, 'data');
+  const { hasPropTypes, propTypesString } = getPropTypesString(params, 'data');
+  const propsInterface = renderString(renderTs, genInterface('Props', hasProps, propString));
+  const stateInterface = renderString((renderTs && hasState), genInterface('State', hasState, stateString));
+  const propTypes = renderString((hasPropTypes && !renderTs), genPropTypes(`${fileName}DataLayer`, propTypesString));
   const passedArguments = {
     fileName,
-    args,
     renderTs,
-    hasProps,
-    propString,
+    hasState,
+    propsInterface,
+    stateInterface,
+    hasPropTypes,
+    propTypes,
   };
   if (args.classes) return genAsClass(passedArguments);
   return genAsFunction(passedArguments);
