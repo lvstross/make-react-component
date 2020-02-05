@@ -1,13 +1,22 @@
 const { renderString, newLine } = require('../utils.js');
 
-function genAsFunction(fileName, args, params) {
-  const renderTs = args.ext === 'ts';
+function genAsFunction({
+  fileName,
+  renderTs,
+  hasProps,
+  propString,
+}) {
   const content =
 `import React from 'react';
 import ${fileName} from './${fileName}';
 
-${renderString(renderTs, 'interface Props {}')}${newLine(renderTs)}
-function ${fileName}DataLayer(props: Props) {
+${hasProps
+  ? renderString(renderTs, `interface Props {
+  ${propString}
+}`)
+  : renderString(renderTs, 'interface Props {}')
+}${newLine(renderTs)}
+function ${fileName}DataLayer(${renderString(renderTs, 'props: Props')}) {
   return (
     <${fileName} text="${fileName} component"/>
   );
@@ -18,13 +27,22 @@ export default ${fileName}DataLayer;
   return content;
 }
 
-function genAsClass(fileName, args, params) {
-  const renderTs = args.ext === 'ts';
+function genAsClass({
+  fileName,
+  renderTs,
+  hasProps,
+  propString,
+}) {
   const content =
 `import React, { Component } from 'react';
 import ${fileName} from './${fileName}';
 
-${renderString(renderTs, 'interface Props {}')}${newLine(renderTs)}
+${hasProps
+  ? renderString(renderTs, `interface Props {
+  ${propString}
+}`)
+  : renderString(renderTs, 'interface Props {}')
+}${newLine(renderTs)}
 class ${fileName}DataLayer extends Component${renderString(renderTs, '<Props>')} {
   render() {
     return (
@@ -39,8 +57,28 @@ export default ${fileName}DataLayer;
 }
 
 function generateDataLayerFile(fileName, args, params) {
-  if (args.classes) return genAsClass(fileName, args, params);
-  return genAsFunction(fileName, args, params);
+  const renderTs = args.ext === 'ts';
+  let propString = '';
+  const hasProps = params.props.data.length > 0;
+  if (hasProps) {
+    params.props.data.forEach((prop, i, arr) => {
+      if (i !== arr.length - 1) {
+          propString += `${prop};
+  `;
+        return;
+      }
+      propString += `${prop};`;
+    });
+  }
+  const passedArguments = {
+    fileName,
+    args,
+    renderTs,
+    hasProps,
+    propString,
+  };
+  if (args.classes) return genAsClass(passedArguments);
+  return genAsFunction(passedArguments);
 }
 
 module.exports = generateDataLayerFile;

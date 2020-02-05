@@ -85,11 +85,11 @@ function confirmDirectory(args, dirPath, path) {
   return path;
 }
 
-function convertNullValues(value) {
-  if (value === 'null') {
-    return null;
-  }
-  return value;
+function convertValues(value) {
+  const isNumber = Number(value);
+  if (!Number.isNaN(isNumber) && isNumber !== 0) return isNumber;
+  if (value) return `'${value}'`;
+  return null;
 }
 
 function interpretParams(params) {
@@ -104,12 +104,12 @@ function interpretParams(params) {
   // util = Util file [@ext]
   let paramState = {
     state: {
-      main: {},
-      data: {},
+      main: [],
+      data: [],
     },
     props: {
-      main: {},
-      data: {},
+      main: [],
+      data: [],
     },
     ext: {
       main: null,
@@ -118,9 +118,6 @@ function interpretParams(params) {
       util: null,
     }
   };
-  // @TODO: may need to keep as strings for easier templating
-  // or find a way to take state paramState from key value pair
-  // back to template string value.
 
   params.forEach(param => {
     if (param.includes('@state')) {
@@ -128,7 +125,9 @@ function interpretParams(params) {
       const commaGroups = currentArgs[2].split(',');
       commaGroups.forEach(group => {
         const keyValue = group.split('=');
-        paramState.state[currentArgs[1]][keyValue[0]] = convertNullValues(keyValue[1]);
+        if (paramState.state[currentArgs[1]]) {
+          paramState.state[currentArgs[1]].push(`${keyValue[0]}: ${convertValues(keyValue[1])}`);
+        }
       });
       return;
     }
@@ -137,7 +136,9 @@ function interpretParams(params) {
       const commaGroups = currentArgs[2].split(',');
       commaGroups.forEach(group => {
         const keyValue = group.split('=');
-        paramState.props[currentArgs[1]][keyValue[0]] = convertNullValues(keyValue[1]);
+        if (paramState.props[currentArgs[1]]) {
+          paramState.props[currentArgs[1]].push(`${keyValue[0]}: ${convertValues(keyValue[1])}`);
+        }
       });
       return;
     }
