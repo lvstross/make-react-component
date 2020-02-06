@@ -1,6 +1,10 @@
 # Change Log
 
-# 1.5.0 (2-5-2020) Latest Version
+# 1.5.1 (2-6-2020) Latest Version
+Removed random console log out put on generation.
+Added table of contents to README file.
+
+# 1.5.0 (2-5-2020)
 Added parameters system.
 Added better TypeScript support.
 Can now add state and props to files.

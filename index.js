@@ -35,7 +35,6 @@ const componentName = getComponentName();
 const { totalArgs, totalParams } = getArguments();
 const args = interpretArguments(totalArgs);
 const params = interpretParams(totalParams);
-console.log('params: ', params);
 
 // *** SET COMPONENT NAMES ***
 

@@ -1,10 +1,22 @@
 # Make React Component
-
 Generate react and react-native components.
 
-## What makes this utility different?
-
-If you search npm, you'll find many packages that do just about the same thing. Many have come before this one and built tools that generate your react components just fine. What makes this one different is that it seeks to simply do more.
+## Table Of Contents
+1. [Features](https://github.com/lvstross/make-react-component#features)
+  * [Features to come](https://github.com/lvstross/make-react-component#features-to-come)
+2. [Installation](https://github.com/lvstross/make-react-component#installation)
+3. [Usage](https://github.com/lvstross/make-react-component#usage)
+4. [Arguments](https://github.com/lvstross/make-react-component#arguments)
+  * [List of possible files](https://github.com/lvstross/make-react-component#list-of-possible-files--a)
+  * [Single File Components](https://github.com/lvstross/make-react-component#single-file-components--s--d--s--u)
+  * [Folder Components](https://github.com/lvstross/make-react-component#folder-components--d--t)
+  * [TypeScript and React Native Components](https://github.com/lvstross/make-react-component#typescript-and-react-native-components--t--n)
+  * [Class Based Components](https://github.com/lvstross/make-react-component#class-based-components--c)
+5. [Parameters](https://github.com/lvstross/make-react-component#parameters)
+  * [Parameter Types](https://github.com/lvstross/make-react-component#parameter-types)
+  * [File Types](https://github.com/lvstross/make-react-component#file-types)
+  * [Key/Values](https://github.com/lvstross/make-react-component#keyvalues)
+6. [Current conventions that will be fixed](https://github.com/lvstross/make-react-component#current-conventions-that-will-be-fixed)
 
 ## Features
 Here are the full list of features so far:
