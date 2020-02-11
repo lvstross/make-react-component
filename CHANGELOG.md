@@ -1,6 +1,9 @@
 # Change Log
 
-# 1.5.1 (2-6-2020) Latest Version
+# 1.5.2 (2-11-2020) Latest Version
+Added github action workflow for automatic publishing.
+
+# 1.5.1 (2-6-2020)
 Removed random console log out put on generation.
 Added table of contents to README file.
 
