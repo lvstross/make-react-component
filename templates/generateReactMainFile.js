@@ -5,6 +5,8 @@ const {
   getStateString,
   getPropTypesString,
   newLine,
+  renderDestructuredValues,
+  renderFunctionDeclaration,
   renderString,
 } = require('./utils.js');
 
@@ -16,12 +18,13 @@ function genAsFunction({
   stateInterface,
   hasPropTypes,
   propTypes,
+  props,
 }) {
   const content =
 `import React from 'react';${renderString((hasPropTypes && !renderTs), `${newLine(true)}import PropTypes from 'prop-types';`)}
 ${renderString(args.style, `import ${fileName}Style from './${fileName}.style';`)}${newLine(args.style)}
 ${propsInterface}${stateInterface}
-function ${fileName}(${renderString((hasPropTypes && !renderTs), 'props')}${renderString(renderTs, 'props: Props')}) {
+${renderFunctionDeclaration(fileName, renderTs, hasPropTypes, props)}
   return (
     ${args.style
       ? `<${fileName}Style className="root">
@@ -75,6 +78,7 @@ export default ${fileName};
 function generateReactMainFile(fileName, args, params) {
   const renderTs = args.ext === 'ts';
   const { hasProps, propString } = getPropsString(params, 'main');
+  const props = renderDestructuredValues(params.props.main);
   const { hasState, stateString } = getStateString(params, 'main');
   const { hasPropTypes, propTypesString } = getPropTypesString(params, 'main');
   const propsInterface = renderString(renderTs, genInterface('Props', hasProps, propString));
@@ -89,6 +93,7 @@ function generateReactMainFile(fileName, args, params) {
     stateInterface,
     hasPropTypes,
     propTypes,
+    props,
   };
   if (args.classes) return genAsClass(passedArguments);
   return genAsFunction(passedArguments);

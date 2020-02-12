@@ -25,7 +25,7 @@ function getComponentName() {
 
   if (componentName.includes('-')) {
     console.log(chalk.yellow('Please pass your component name as the first argument.'));
-    console.log(chalk.yellow(`Example: ${chalk.italic('~ makeReact modal -abc')}`));
+    console.log(chalk.yellow(`Example: ${chalk.italic('~ makeReact modal -Atn')}`));
     process.exit();
   }
   return componentName
@@ -114,11 +114,11 @@ function confirmDirectory(args, dirPath, path) {
  */
 function inferTypes(value) {
   const type = value.toLowerCase();
-  if (type === 'str' || type === 'string') return 'string';
-  if (type === 'num' || type === 'number') return 'number';
-  if (type === 'bool' || type === 'boolean') return 'boolean';
-  if (type === 'obj' || type === 'object') return 'object';
-  if (type === 'arr' || type === 'array') return 'array';
+  if (type === 's' || type === 'str' || type === 'string') return 'string';
+  if (type === 'n' || type === 'num' || type === 'number') return 'number';
+  if (type === 'b' || type === 'bool' || type === 'boolean') return 'boolean';
+  if (type === 'o' || type === 'obj' || type === 'object') return 'object';
+  if (type === 'a' || type === 'arr' || type === 'array') return 'array';
   if (type === 'any') return 'any';
 }
 
@@ -130,11 +130,11 @@ function inferTypes(value) {
  */
 function inferPropTypes(value) {
   const type = value.toLowerCase();
-  if (type === 'str' || type === 'string') return 'PropTypes.string';
-  if (type === 'num' || type === 'number') return 'PropTypes.number';
-  if (type === 'bool' || type === 'boolean') return 'PropTypes.boolean';
-  if (type === 'obj' || type === 'object') return 'PropTypes.object';
-  if (type === 'arr' || type === 'array') return 'PropTypes.array';
+  if (type === 's' || type === 'str' || type === 'string') return 'PropTypes.string';
+  if (type === 'n' || type === 'num' || type === 'number') return 'PropTypes.number';
+  if (type === 'b' || type === 'bool' || type === 'boolean') return 'PropTypes.boolean';
+  if (type === 'o' || type === 'obj' || type === 'object') return 'PropTypes.object';
+  if (type === 'a' || type === 'arr' || type === 'array') return 'PropTypes.array';
   if (type === 'any') return 'PropTypes.any';
 }
 
@@ -219,21 +219,14 @@ function interpretParams(params) {
 function interpretArguments(args) {
   // *** DIRECTORY ARGUMENTS ***
 
-  // Require at least one argument.
-  if (args.length === 0) {
-    console.log(chalk.yellow('Missing arguments: Please provide at least one agrument.'));
-    console.log(chalk.yellow(`Run ${chalk.italic('makeReact --help')} to get a full list of arguments.`));
-    process.exit();
-  }
-
-  // generate component as single file with no folders
-  const SINGLE_FILE = args.includes('S');
   // generate all folders and files for component
   const ALL = args.includes('A');
   // generate component as a folder
   const DIRECTORY = args.includes('D');
   // generate component test folder
   const TEST_DIRECTORY = args.includes('T');
+  // generate single file by default
+  const SINGLE_FILE = !ALL && !DIRECTORY && !TEST_DIRECTORY;
   // generate files with lowercase, uppercase by default
   const LOWER_CASE = args.includes('l');
   //generate files as classes, functional by default
@@ -256,7 +249,6 @@ function interpretArguments(args) {
 
   // generate files as react native, react by default
   const NATIVE = args.includes('n');
-
 
   return {
     all: ALL,

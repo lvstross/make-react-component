@@ -1,6 +1,13 @@
 # Change Log
 
-# 1.5.2 (2-11-2020) Latest Version
+# 1.6.0 (2-12-2020) Latest Version
+Deprecated the -S argument. Generating a single file no longer requires -S. It's now the default behavior.
+Props are now destructured in functional components.
+TypeScript functional components have been changed to a const declaration instead of a function declaration.
+Readme and man page has been updated to reflect the new changes.
+Examples have been provided.
+
+# 1.5.2 (2-11-2020)
 Added github action workflow for automatic publishing.
 
 # 1.5.1 (2-6-2020)

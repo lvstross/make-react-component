@@ -5,6 +5,8 @@ const {
   getStateString,
   getPropTypesString,
   newLine,
+  renderDestructuredValues,
+  renderFunctionDeclaration,
   renderString,
 } = require('./utils.js');
 
@@ -15,12 +17,13 @@ function genAsFunction({
   stateInterface,
   hasPropTypes,
   propTypes,
+  props,
 }) {
   const content =
 `import React from 'react';${renderString((hasPropTypes && !renderTs), `${newLine(true)}import PropTypes from 'prop-types';`)}
 import { StyleSheet, Text, View } from 'react-native';${newLine(renderTs)}
 ${propsInterface}${stateInterface}
-function ${fileName}(${renderString((hasPropTypes && !renderTs), 'props')}${renderString(renderTs, 'props: Props')}) {
+${renderFunctionDeclaration(fileName, renderTs, hasPropTypes, props)}
   return (
     <View style={styles.root}>
       <Text>${fileName} component</Text>
@@ -83,6 +86,7 @@ export default ${fileName};
 function generateSingleReactNativeFile(fileName, args, params) {
   const renderTs = args.ext === 'ts';
   const { hasProps, propString } = getPropsString(params, 'main');
+  const props = renderDestructuredValues(params.props.main);
   const { hasState, stateString } = getStateString(params, 'main');
   const { hasPropTypes, propTypesString } = getPropTypesString(params, 'main');
   const propsInterface = renderString(renderTs, genInterface('Props', hasProps, propString));
@@ -97,6 +101,7 @@ function generateSingleReactNativeFile(fileName, args, params) {
     stateInterface,
     hasPropTypes,
     propTypes,
+    props,
   };
   if (args.classes) return genAsClass(passedArguments);
   return genAsFunction(passedArguments);

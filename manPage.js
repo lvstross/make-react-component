@@ -13,10 +13,6 @@ Arguments:  Preceed your arguments with '-'. '--' are ignored. All
 
                  ***** FILE GENERATOR ARGUMENTS ******
 
--S:         Generates a single react component file with out a
-            folder. This file by default is going to be a .js
-            file with web code in mind.
-
 -A:         Generates all folders and files as .js web files.
 
 -D:         Generates the component as a folder component with
@@ -90,11 +86,11 @@ A comma separated, unbroken string of key value pairs that you pass in
 for your state or props parameters. The key can be named anything, but
 the value has to be one of the following type definitions.
 
-String: [str, string]
-Number: [num, number]
-Boolean: [bool, boolean]
-Object: [obj, object]
-Array: [arr, array]
+String: [s, str, string]
+Number: [n, num, number]
+Boolean: [b, bool, boolean]
+Object: [o, obj, object]
+Array: [a, arr, array]
 Any: [any]
 
 Example: firstName=str,age=num,isHappy=bool,interests=obj
