@@ -1,9 +1,10 @@
 function generateIndexFile(fileName, args) {
-  const asDataLayer = args.dataLayer ? 'DataLayer' : '';
+  const asDataLayerName = args.dataLayer ? 'DataLayer' : '';
+  const asDataLayerFile = args.dataLayer ? '.dataLayer' : '';
   const content =
-`import ${fileName}${asDataLayer} from './${fileName}${asDataLayer}';
+`import ${fileName}${asDataLayerName} from './${fileName}${asDataLayerFile}';
 
-export default ${fileName}${asDataLayer};
+export default ${fileName}${asDataLayerName};
 `;
   return content;
 }
