@@ -1,11 +1,6 @@
 const {
-  genInterface,
-  genPropTypes,
-  getPropsString,
-  getStateString,
-  getPropTypesString,
+  getGenerateFileProps,
   newLine,
-  renderDestructuredValues,
   renderFunctionDeclaration,
   renderString,
 } = require('./utils.js');
@@ -13,7 +8,6 @@ const {
 function genAsFunction({
   fileName,
   renderTs,
-  hasState,
   propsInterface,
   stateInterface,
   hasPropTypes,
@@ -65,24 +59,7 @@ export default ${fileName}DataLayer;
 }
 
 function generateDataLayerFile(fileName, args, params) {
-  const renderTs = args.ext === 'ts';
-  const { hasProps, propString } = getPropsString(params, 'data');
-  const props = renderDestructuredValues(params.props.data);
-  const { hasState, stateString } = getStateString(params, 'data');
-  const { hasPropTypes, propTypesString } = getPropTypesString(params, 'data');
-  const propsInterface = renderString(renderTs, genInterface('Props', hasProps, propString));
-  const stateInterface = renderString((renderTs && hasState), genInterface('State', hasState, stateString));
-  const propTypes = renderString((hasPropTypes && !renderTs), genPropTypes(`${fileName}DataLayer`, propTypesString));
-  const passedArguments = {
-    fileName,
-    renderTs,
-    hasState,
-    propsInterface,
-    stateInterface,
-    hasPropTypes,
-    propTypes,
-    props,
-  };
+  const passedArguments = getGenerateFileProps(fileName, args, params, 'data');
   if (args.classes) return genAsClass(passedArguments);
   return genAsFunction(passedArguments);
 }

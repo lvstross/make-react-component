@@ -1,6 +1,14 @@
 # Change Log
 
-# 1.6.0 (2-12-2020) Latest Version
+# 1.6.2 (1-1-2021) Latest Version
+Refined the template main function so that all reusable code was put into it's own function.
+Added more documentation on how to contribute to the project.
+Corrected some misspelled words in the documentation.
+
+# 1.6.1 (4-28-2020)
+Fixed index.js datalayer naming.
+
+# 1.6.0 (2-12-2020)
 Deprecated the -S argument. Generating a single file no longer requires -S. It's now the default behavior.
 Props are now destructured in functional components.
 TypeScript functional components have been changed to a const declaration instead of a function declaration.

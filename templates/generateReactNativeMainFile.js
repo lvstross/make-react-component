@@ -1,11 +1,6 @@
 const {
-  genInterface,
-  genPropTypes,
-  getPropsString,
-  getStateString,
-  getPropTypesString,
+  getGenerateFileProps,
   newLine,
-  renderDestructuredValues,
   renderFunctionDeclaration,
   renderString,
 } = require('./utils.js');
@@ -100,25 +95,7 @@ export default ${fileName};
 }
 
 function generateReactNativeMainFile(fileName, args, params) {
-  const renderTs = args.ext === 'ts';
-  const { hasProps, propString } = getPropsString(params, 'main');
-  const props = renderDestructuredValues(params.props.main);
-  const { hasState, stateString } = getStateString(params, 'main');
-  const { hasPropTypes, propTypesString } = getPropTypesString(params, 'main');
-  const propsInterface = renderString(renderTs, genInterface('Props', hasProps, propString));
-  const stateInterface = renderString((renderTs && hasState), genInterface('State', hasState, stateString));
-  const propTypes = renderString((hasPropTypes && !renderTs), genPropTypes(fileName, propTypesString));
-  const passedArguments = {
-    fileName,
-    args,
-    renderTs,
-    hasState,
-    propsInterface,
-    stateInterface,
-    hasPropTypes,
-    propTypes,
-    props,
-  };
+  const passedArguments = getGenerateFileProps(fileName, args, params, 'main');
   if (args.classes) return genAsClass(passedArguments);
   return genAsFunction(passedArguments);
 }

@@ -18,6 +18,7 @@ Generate react and react-native components.
   - [Key/Values](https://github.com/lvstross/make-react-component#keyvalues)
 - [Current conventions that will be fixed](https://github.com/lvstross/make-react-component#current-conventions-that-will-be-fixed)
 - [Examples](https://github.com/lvstross/make-react-component#examples)
+- [Contribute](https://github.com/lvstross/make-react-component#contribute)
 
 ## Features
 Here are the full list of features so far:
@@ -185,3 +186,21 @@ A folder component with a test directory, a style file, a data layer file, a uti
 A single file component as a React Native component with a custom extension.
 
 `~ makeReact box -n @ext:main:component.partial.jsx`
+
+## Contribute
+To get started, clone the project on your machine and run `npm link` in the project root to symlink the module to npm so that you can run the `makeReact` command anywhere on your machine to test it. You can review the documentation on this [here](https://docs.npmjs.com/cli/v6/commands/npm-link). When you are finished symlinking the module, be sure to run `npm unlink` in the project root.
+
+### Project Structure
+The project is broken down into three parts:
+
+1. The main `index.js` as the start and end of all that happens in that this is where the project gathers all the data it needs and then actually generates the files.
+2. The `utils.js` files where all the shared or otherwise computations happen.
+3. The `template/generate*` files that are responsible for actually compiling the file content to write to the files at the end back in the `index.js` file.
+
+All the main data that decides which files to generate and how to generate them are centralized in the two functions called `interpretParams` and `interpretArguments` located in the `utils.js` file at the root. If you read the docs above, you know that there are two ways to tell the component generator what files to generate and in what ways to generate them and this primarily through arguments and parameters.
+
+Once the projects knows these bits of information, it will then run through the template files which have their own `utils.js` file that has helpers to aggregate the data and generate the content accordingly. From there, the `index.js` files takes the template data and based on the arguments the user passes, will generate the corresponding files.
+
+I want to say it's that simple, but I'll leave that up to you to decide as you look through the project.
+
+Read more about templates [here](https://github.com/lvstross/make-react-component/templates).

@@ -6,7 +6,7 @@ Naming your components: All component files are generated with start case,
             by default whereas the folder for the component will be lower
             case. Example: modal => Modal
 
-Arguments:  Preceed your arguments with '-'. '--' are ignored. All
+Arguments:  Prefix your arguments with '-'. '--' are ignored. All
             arguments can be placed after one '-' or every argument
             can have it's own '-'.
             Example: -Atn and -A -t -n are both acceptable.

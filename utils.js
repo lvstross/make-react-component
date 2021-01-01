@@ -107,7 +107,7 @@ function confirmDirectory(args, dirPath, path) {
 }
 
 /**
- * Converts values to their appropriate primative types
+ * Converts values to their appropriate primitive types
  *
  * @param {String} value - value to be converted
  * @return {Many}
@@ -125,8 +125,8 @@ function inferTypes(value) {
 /**
  * Infer Prop Types
  *
- * @param {String} value - value whos type is to be infered
- * @return {String} - infered prop type
+ * @param {String} value - value whose type is to be inferred
+ * @return {String} - inferred prop type
  */
 function inferPropTypes(value) {
   const type = value.toLowerCase();
@@ -144,7 +144,7 @@ function inferPropTypes(value) {
  *
  * Files associated:
  * main = Single or Main file [@state, @props, @ext]
- * data = Datalayer file [@state, @props, @ext]
+ * data = DataLayer file [@state, @props, @ext]
  * style = Style file [@ext]
  * util = Utils file [@ext]
  *

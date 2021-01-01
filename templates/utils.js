@@ -175,9 +175,42 @@ function renderFunctionDeclaration(fileName, asTs, hasPropTypes, props) {
     : `function ${fileName}(${destructuredProps}) {`;
 }
 
+/**
+ * Get generate file props
+ * 
+ * @param {String} fileName
+ * @param {Object} args
+ * @param {Object} params
+ * @param {String} fileType - data | main
+ * @return {Object}
+ */
+function getGenerateFileProps(fileName, args, params, fileType) {
+  const renderTs = args.ext === 'ts';
+  const { hasProps, propString } = getPropsString(params, fileType);
+  const props = renderDestructuredValues(params.props.main);
+  const { hasState, stateString } = getStateString(params, fileType);
+  const { hasPropTypes, propTypesString } = getPropTypesString(params, fileType);
+  const propsInterface = renderString(renderTs, genInterface('Props', hasProps, propString));
+  const stateInterface = renderString((renderTs && hasState), genInterface('State', hasState, stateString));
+  const modifiedFileName = fileType === 'data' ? `${fileName}DataLayer` : fileName;
+  const propTypes = renderString((hasPropTypes && !renderTs), genPropTypes(modifiedFileName, propTypesString));
+  return {
+    fileName,
+    args,
+    renderTs,
+    hasState,
+    propsInterface,
+    stateInterface,
+    hasPropTypes,
+    propTypes,
+    props,
+  };
+}
+
 module.exports = {
   genInterface,
   genPropTypes,
+  getGenerateFileProps,
   getPropsString,
   getStateString,
   getPropTypesString,
