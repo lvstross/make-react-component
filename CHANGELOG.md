@@ -1,6 +1,9 @@
 # Change Log
 
-# 1.6.2 (1-1-2021) Latest Version
+# 1.6.3 (1-1-2021) Latest Version
+Fixed broken doc link to templates page.
+
+# 1.6.2 (1-1-2021)
 Refined the template main function so that all reusable code was put into it's own function.
 Added more documentation on how to contribute to the project.
 Corrected some misspelled words in the documentation.

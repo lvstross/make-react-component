@@ -203,4 +203,4 @@ Once the projects knows these bits of information, it will then run through the 
 
 I want to say it's that simple, but I'll leave that up to you to decide as you look through the project.
 
-Read more about templates [here](https://github.com/lvstross/make-react-component/templates).
+Read more about templates [here](https://github.com/lvstross/make-react-component/tree/master/templates).
