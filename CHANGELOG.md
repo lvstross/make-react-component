@@ -1,6 +1,9 @@
 # Change Log
 
-# 1.6.3 (1-1-2021) Latest Version
+# 2.0.0 (date) Latest Version
+Removed complicated arguments system for prompt pattern instead. Makes for a more approachable cli and allows for easier implementation of future templates.
+
+# 1.6.3 (1-1-2021)
 Fixed broken doc link to templates page.
 
 # 1.6.2 (1-1-2021)
