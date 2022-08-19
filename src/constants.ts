@@ -1,67 +1,37 @@
 import { OptionDefinition } from 'command-line-args';
-import { getDirName } from './helpers';
+import { templateOptions } from './templates';
+import { TemplateOption } from './templates/types';
 
+// Allow for options to filter different types of templates
+// Web | Native | Class | Functional | Specialty | JS | TS
 export const optionDefs: OptionDefinition[] = [
-  { name: 'yes', alias: 'y', type: Boolean, defaultValue: false },
+  { name: 'yes', alias: 'y', type: Boolean, defaultValue: false }, // Remove Later when options are probably parsed
+  // { name: 'web', alias: 'w', type: Boolean, defaultValue: false },
+  // { name: 'native', alias: 'n', type: Boolean, defaultValue: false },
+  // { name: 'class', alias: 'c', type: Boolean, defaultValue: false },
+  // { name: 'function', alias: 'f', type: Boolean, defaultValue: false },
+  // { name: 'spec', alias: 's', type: Boolean, defaultValue: false },
+  // { name: 'javascript', alias: 'js', type: Boolean, defaultValue: false },
+  // { name: 'typeScript', alias: 'ts', type: Boolean, defaultValue: false }
 ];
 
 export const defaults = {
-  pkgName: getDirName(),
-  version: '1.0.0',
-  description: '',
-  entryPoint: 'index.js',
-  testCommand: 'echo "Error: no test specified" && exit 1',
-  gitRepo: '',
-  keywords: '',
-  author: '',
-  license: 'ISC'
+  defaultTemplate: `[${templateOptions[0].alias}]: ${templateOptions[0].description}`
+};
+
+const diplayTemplateOptions = () => {
+  return templateOptions.map((opt: TemplateOption) => {
+    return `[${opt.alias}]: ${opt.description}`;
+  });
 };
 
 export const mainPrompts = [
   {
-    name: 'pkgName',
-    message: 'package name:',
-    default: defaults.pkgName
-  },
-  {
-    name: 'version',
-    message: 'version:',
-    default: defaults.version
-  },
-  {
-    name: 'description',
-    message: 'description: ',
-    default: defaults.description
-  },
-  {
-    name: 'entryPoint',
-    message: 'entry point:',
-    default: defaults.entryPoint
-  },
-  {
-    name: 'testCommand',
-    message: 'test command: ',
-    default: defaults.testCommand
-  },
-  {
-    name: 'gitRepo',
-    message: 'git repository: ',
-    default: defaults.gitRepo
-  },
-  {
-    name: 'keywords',
-    message: 'keywords: ',
-    default: defaults.keywords
-  },
-  {
-    name: 'author',
-    message: 'author: ',
-    default: defaults.keywords
-  },
-  {
-    name: 'license',
-    message: 'license:',
-    default: defaults.license
+    name: 'template',
+    message: `Choose a template: \n\n`,
+    choices: diplayTemplateOptions(),
+    type: 'list',
+    default: defaults.defaultTemplate
   }
 ];
 
