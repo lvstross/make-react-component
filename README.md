@@ -5,7 +5,7 @@ Generate react and react-native components.
 - [Installation](https://github.com/lvstross/make-react-component#installation)
 - [Usage](https://github.com/lvstross/make-react-component#usage)
 - [Templates](https://github.com/lvstross/make-react-component#templates)
-<!-- - [Shortcuts](https://github.com/lvstross/make-react-component#shortcuts) -->
+- [Shortcuts](https://github.com/lvstross/make-react-component#shortcuts)
 - [Contribute](https://github.com/lvstross/make-react-component#contribute)
 
 ## Installation
