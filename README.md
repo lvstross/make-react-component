@@ -1,7 +1,7 @@
 # Make React Component
 Generate react and react-native components.
 
-<img src="https://github.com/lvstross/make-react-component/tree/main/assets/make-react-component-cli.gif" />
+<img src="https://github.com/lvstross/make-react-component/blob/main/assets/make-react-component-cli.gif" />
 
 ## Table Of Contents
 - [Installation](https://github.com/lvstross/make-react-component#installation)
