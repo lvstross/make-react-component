@@ -1,48 +1,50 @@
-import ReactFnJs from './react-fn-js';
-import ReactClJs from './react-cl-js';
-import ReactFnTs from './react-fn-ts';
-import ReactClTs from './react-cl-ts';
-import ReactFnReduxConnectJs from './react-fn-redux-connect-js';
-import ReactClReduxConnectJs from './react-cl-redux-connect-js';
-import ReactFnReduxConnectTs from './react-fn-redux-connect-ts';
-import ReactClReduxConnectTs from './react-cl-redux-connect-ts';
+import reactFnJs from './react-fn-js';
+import reactClJs from './react-cl-js';
+import reactFnTs from './react-fn-ts';
+import reactClTs from './react-cl-ts';
+import reactFnReduxConnectJs from './react-fn-redux-connect-js';
+import reactClReduxConnectJs from './react-cl-redux-connect-js';
+import reactFnReduxConnectTs from './react-fn-redux-connect-ts';
+import reactClReduxConnectTs from './react-cl-redux-connect-ts';
+import reactNativeFnJs from './react-native-fn-js';
+import reactNativeFnTs from './react-native-fn-ts';
 import { TemplateOption, Platform, Shape, Syntax, File } from './types';
 
 export const templateOptions: TemplateOption[] = [
     {
         alias: 'react-fn-js',
-        description: 'Basic functional component in Javascript.',
+        description: 'Basic functional component in Javascript',
         platform: Platform.WEB,
         shape: Shape.FUNCTION,
         syntax: Syntax.JS,
-        template: ReactFnJs,
+        template: reactFnJs,
         fileType: File.JSX
     },
     {
         alias: 'react-cl-js',
-        description: 'Basic class component in Javascript.',
+        description: 'Basic class component in Javascript',
         platform: Platform.WEB,
         shape: Shape.CLASS,
         syntax: Syntax.JS,
-        template: ReactClJs,
+        template: reactClJs,
         fileType: File.JSX
     },
     {
         alias: 'react-fn-ts',
-        description: 'Basic functional component in Typescript.',
+        description: 'Basic functional component in Typescript',
         platform: Platform.WEB,
         shape: Shape.FUNCTION,
         syntax: Syntax.TS,
-        template: ReactFnTs,
+        template: reactFnTs,
         fileType: File.TSX
     },
     {
         alias: 'react-cl-ts',
-        description: 'Basic class component in Typescript.',
+        description: 'Basic class component in Typescript',
         platform: Platform.WEB,
         shape: Shape.CLASS,
         syntax: Syntax.TS,
-        template: ReactClTs,
+        template: reactClTs,
         fileType: File.TSX
     },
     {
@@ -51,7 +53,7 @@ export const templateOptions: TemplateOption[] = [
         platform: Platform.WEB,
         shape: Shape.FUNCTION,
         syntax: Syntax.JS,
-        template: ReactFnReduxConnectJs,
+        template: reactFnReduxConnectJs,
         fileType: File.JSX
     },
     {
@@ -60,7 +62,7 @@ export const templateOptions: TemplateOption[] = [
         platform: Platform.WEB,
         shape: Shape.CLASS,
         syntax: Syntax.JS,
-        template: ReactClReduxConnectJs,
+        template: reactClReduxConnectJs,
         fileType: File.JSX
     },
     {
@@ -69,7 +71,7 @@ export const templateOptions: TemplateOption[] = [
         platform: Platform.WEB,
         shape: Shape.FUNCTION,
         syntax: Syntax.TS,
-        template: ReactFnReduxConnectTs,
+        template: reactFnReduxConnectTs,
         fileType: File.TSX
     },
     {
@@ -78,7 +80,25 @@ export const templateOptions: TemplateOption[] = [
         platform: Platform.WEB,
         shape: Shape.CLASS,
         syntax: Syntax.TS,
-        template: ReactClReduxConnectTs,
+        template: reactClReduxConnectTs,
+        fileType: File.TSX
+    },
+    {
+        alias: 'react-native-fn-js',
+        description: 'React Native functional component in Javascript',
+        platform: Platform.NATIVE,
+        shape: Shape.FUNCTION,
+        syntax: Syntax.JS,
+        template: reactNativeFnJs,
+        fileType: File.JSX
+    },
+    {
+        alias: 'react-native-fn-ts',
+        description: 'React Native functional component in Typescript',
+        platform: Platform.NATIVE,
+        shape: Shape.FUNCTION,
+        syntax: Syntax.TS,
+        template: reactNativeFnTs,
         fileType: File.TSX
     },
 ];
