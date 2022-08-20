@@ -28,7 +28,10 @@ const dirPath = getDirPath();
       const output: string | undefined = parseAnswers(answers);
       const template: TemplateOption | undefined = templateOptions.find((opt: TemplateOption) => opt.alias === output);
 
+      console.log('CODE:=============================================');
       console.log(template?.template);
+      console.log('CODE:=============================================');
+
       const confirm: PromptAnswers = await inquirer.prompt(confirmPrompt);
       
       if (confirm.okay) {

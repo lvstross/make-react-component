@@ -31,7 +31,8 @@ export const mainPrompts = [
     message: `Choose a template: \n\n`,
     choices: diplayTemplateOptions(),
     type: 'list',
-    default: defaults.defaultTemplate
+    default: defaults.defaultTemplate,
+    loop: false
   }
 ];
 
