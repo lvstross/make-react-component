@@ -3,9 +3,6 @@ name: Publish make-react-component to NPM
 on:
   release:
     types: [published]
-  # push:
-  #   branches:
-  #     - main
 
 jobs:
   npm-publish:
