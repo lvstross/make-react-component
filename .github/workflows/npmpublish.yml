@@ -1,4 +1,4 @@
-name: Publish
+name: Publish make-react-component to NPM
 
 on:
   push:
@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@master
+    - name: Build modules
+      run: npm run build
     - name: Create .npmrc
       run: echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" >> ~/.npmrc
       env:

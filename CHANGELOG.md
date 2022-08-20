@@ -1,7 +1,8 @@
 # Change Log
 
-# 2.0.0 (date) Latest Version
+# 2.0.0 (8-20-2022) Latest Version
 Removed complicated arguments system for prompt pattern instead. Makes for a more approachable cli and allows for easier implementation of future templates.
+Migrate project to typescript and updated Readme.
 
 # 1.6.3 (1-1-2021)
 Fixed broken doc link to templates page.

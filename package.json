@@ -2,18 +2,18 @@
   "name": "make-react-component",
   "version": "2.0.0",
   "description": "Generate react and react-native components.",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "repository": "https://github.com/lvstross/make-react-component",
   "scripts": {
     "start": "ts-node ./src/index.ts",
     "build": "rm -rf dist && tsc -p .",
     "lint": "eslint src --ext .ts",
     "bin:up": "npm run build && npm link",
-    "bin:down": "bash scripts/binDown.sh makeReactTwo",
+    "bin:down": "bash scripts/binDown.sh makeReact",
     "bin": "npm run bin:down && npm run bin:up"
   },
   "bin": {
-    "makeReactTwo": "./dist/index.js"
+    "makeReact": "./dist/index.js"
   },
   "keywords": [
     "make-react-component",

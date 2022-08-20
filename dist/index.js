@@ -18,32 +18,29 @@ const command_line_args_1 = __importDefault(require("command-line-args"));
 const helpers_1 = require("./helpers");
 const utils_1 = require("./utils");
 const constants_1 = require("./constants");
+const templates_1 = require("./templates");
 const options = (0, command_line_args_1.default)(constants_1.optionDefs);
 const dirPath = (0, helpers_1.getDirPath)();
-if (options.yes) {
-    const pkgJSON = (0, utils_1.parseAnswers)(constants_1.defaults);
-    (0, utils_1.writePackageJson)(pkgJSON);
-}
 (() => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(`
-This utility will walk you through creating a package.json file.
-It only covers the most common items, and tries to guess sensible defaults.
-See 'npm help json' for definitive documentation on these fields
-and exactly what they do.
-Use 'npm install <pkg>' afterwards to install a package and
-save it as a dependency in the package.json file.
-Press ^C at any time to quit.
-`);
+    console.clear();
+    console.log('Welcome To Make React Component\n');
     try {
-        const answers = yield inquirer_1.default.prompt(constants_1.mainPrompts);
-        const pkgJSON = (0, utils_1.parseAnswers)(answers);
-        console.log(`
-About to write to ${dirPath}/package.json:
-${pkgJSON}
-`);
-        const confirm = yield inquirer_1.default.prompt(constants_1.confirmPrompt);
-        if (confirm.okay) {
-            (0, utils_1.writePackageJson)(pkgJSON);
+        let selecting = true;
+        while (selecting) {
+            const answers = yield inquirer_1.default.prompt(constants_1.mainPrompts);
+            const output = (0, utils_1.parseAnswers)(answers);
+            const template = templates_1.templateOptions.find((opt) => opt.alias === output);
+            console.log('CODE:=============================================');
+            console.log(template === null || template === void 0 ? void 0 : template.template);
+            console.log('CODE:=============================================');
+            const confirm = yield inquirer_1.default.prompt(constants_1.confirmPrompt);
+            if (confirm.okay) {
+                (0, utils_1.generateFile)(template || templates_1.templateOptions[0]);
+                console.log(`${template === null || template === void 0 ? void 0 : template.alias} generated!`);
+                selecting = false;
+                process.exit();
+            }
+            console.clear();
         }
     }
     catch (error) {
