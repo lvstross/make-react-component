@@ -3,7 +3,7 @@ name: Publish make-react-component to NPM
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   npm-publish:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
-      uses: actions/checkout@master
+      uses: actions/checkout@main
     - name: Install deps
       run: npm install
     - name: Build modules
