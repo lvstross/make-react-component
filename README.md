@@ -1,6 +1,8 @@
 # Make React Component
 Generate react and react-native components.
 
+<img src="https://github.com/lvstross/make-react-component/tree/main/assets/make-react-component-cli.gif" />
+
 ## Table Of Contents
 - [Installation](https://github.com/lvstross/make-react-component#installation)
 - [Usage](https://github.com/lvstross/make-react-component#usage)
@@ -17,7 +19,7 @@ Generate react and react-native components.
 `makeReact` is the starting command
 
 ## Templates
-See the full list of available templates [here](https://github.com/lvstross/make-react-component/tree/master/src/templates).
+See the full list of available templates [here](https://github.com/lvstross/make-react-component/tree/main/src/templates).
 
 ## Shortcuts
 Coming soon with CLI arguments for quicker template navigation
