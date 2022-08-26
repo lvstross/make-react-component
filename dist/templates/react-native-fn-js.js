@@ -8,7 +8,7 @@ const Component = ({ name }) => {
     const [age, setAge] = useState
 
     return (
-        <TouchableOpacity onPress={() => setAge(age += 1)}>
+        <TouchableOpacity onPress={() => setAge(age + 1)}>
             <Text>{name} is {age} years old.</Text>
         </TouchableOpacity>
     );

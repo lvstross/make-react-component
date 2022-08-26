@@ -23,6 +23,7 @@ const options = (0, command_line_args_1.default)(constants_1.optionDefs);
 const dirPath = (0, helpers_1.getDirPath)();
 (() => __awaiter(void 0, void 0, void 0, function* () {
     console.clear();
+    console.log('options: ', options);
     console.log('Welcome To Make React Component\n');
     try {
         let selecting = true;

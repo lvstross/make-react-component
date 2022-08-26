@@ -1,6 +1,6 @@
 export enum Platform {
     WEB = 'WEB',
-    NATIVE = 'NATIVE',
+    MOBILE = 'MOBILE',
     SHARED = 'SHARED'
 }
 

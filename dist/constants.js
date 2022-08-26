@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.confirmPrompt = exports.mainPrompts = exports.defaults = exports.optionDefs = void 0;
 const templates_1 = require("./templates");
 exports.optionDefs = [
-    { name: 'yes', alias: 'y', type: Boolean, defaultValue: false },
+    { name: 'filter', alias: 'f', type: String, multiple: true },
 ];
 exports.defaults = {
     defaultTemplate: `[${templates_1.templateOptions[0].alias}]: ${templates_1.templateOptions[0].description}`

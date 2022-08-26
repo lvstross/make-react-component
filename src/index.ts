@@ -7,20 +7,16 @@ import { parseAnswers, generateFile } from './utils';
 import { optionDefs, mainPrompts, confirmPrompt, defaults } from './constants';
 import { templateOptions } from './templates';
 import { TemplateOption } from './templates/types';
-
-// Get utils
-const options = commandLineArgs(optionDefs);
-const dirPath = getDirPath();
-
-// Handle command line arguments
-// if (options.yes) {
-//   const pkgJSON = parseAnswers(defaults);
-//   generateFile(pkgJSON);
-// }
+import { Options } from './types';
 
 (async () => {
   console.clear();
   console.log('Welcome To Make React Component\n');
+
+  // Handle command line arguments
+  const options = commandLineArgs(optionDefs) as Options;
+  const dirPath = getDirPath();
+
   try {
     let selecting = true;
     while (selecting) {

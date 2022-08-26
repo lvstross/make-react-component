@@ -14,6 +14,11 @@ const react_fn_redux_connect_ts_1 = __importDefault(require("./react-fn-redux-co
 const react_cl_redux_connect_ts_1 = __importDefault(require("./react-cl-redux-connect-ts"));
 const react_native_fn_js_1 = __importDefault(require("./react-native-fn-js"));
 const react_native_fn_ts_1 = __importDefault(require("./react-native-fn-ts"));
+const react_redux_legacy_js_1 = __importDefault(require("./react-redux-legacy-js"));
+const react_redux_toolkit_js_1 = __importDefault(require("./react-redux-toolkit-js"));
+const react_redux_reselect_js_1 = __importDefault(require("./react-redux-reselect-js"));
+const react_redux_toolkit_ts_1 = __importDefault(require("./react-redux-toolkit-ts"));
+const react_test_lib_jest_js_1 = __importDefault(require("./react-test-lib-jest-js"));
 const types_1 = require("./types");
 exports.templateOptions = [
     {
@@ -106,4 +111,49 @@ exports.templateOptions = [
         template: react_native_fn_ts_1.default,
         fileType: types_1.File.TSX
     },
+    {
+        alias: 'react-redux-legacy-js',
+        description: 'Legacy redux actions, reducers in Javascript',
+        platform: types_1.Platform.SHARED,
+        shape: types_1.Shape.FUNCTION,
+        syntax: types_1.Syntax.JS,
+        template: react_redux_legacy_js_1.default,
+        fileType: types_1.File.JS
+    },
+    {
+        alias: 'react-redux-toolkit-js',
+        description: 'Redux toolkit actions, reducers slice in Javascript',
+        platform: types_1.Platform.SHARED,
+        shape: types_1.Shape.FUNCTION,
+        syntax: types_1.Syntax.JS,
+        template: react_redux_toolkit_js_1.default,
+        fileType: types_1.File.JS
+    },
+    {
+        alias: 'react-redux-reselect-js',
+        description: 'Redux reselect example in Javascript',
+        platform: types_1.Platform.SHARED,
+        shape: types_1.Shape.FUNCTION,
+        syntax: types_1.Syntax.JS,
+        template: react_redux_reselect_js_1.default,
+        fileType: types_1.File.JS
+    },
+    {
+        alias: 'react-redux-toolkit-ts',
+        description: 'Redux toolkit actions, reducers slice in Typescript',
+        platform: types_1.Platform.SHARED,
+        shape: types_1.Shape.FUNCTION,
+        syntax: types_1.Syntax.TS,
+        template: react_redux_toolkit_ts_1.default,
+        fileType: types_1.File.TS
+    },
+    {
+        alias: 'react-test-lib-jest-js',
+        description: 'React testing-library example with Jest',
+        platform: types_1.Platform.SHARED,
+        shape: types_1.Shape.FUNCTION,
+        syntax: types_1.Syntax.JS,
+        template: react_test_lib_jest_js_1.default,
+        fileType: types_1.File.JS
+    }
 ];

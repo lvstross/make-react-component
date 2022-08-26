@@ -5,6 +5,7 @@ var Platform;
 (function (Platform) {
     Platform["WEB"] = "WEB";
     Platform["NATIVE"] = "NATIVE";
+    Platform["SHARED"] = "SHARED";
 })(Platform = exports.Platform || (exports.Platform = {}));
 var Shape;
 (function (Shape) {

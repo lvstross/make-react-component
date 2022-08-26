@@ -22,7 +22,14 @@ Generate react and react-native components.
 See the full list of available templates [here](https://github.com/lvstross/make-react-component/tree/main/src/templates).
 
 ## Shortcuts
-Coming soon with CLI arguments for quicker template navigation
+Coming Soon:
+The program already guides you through the process with a prompt, making it easy to find a template and generate it with out having to know any commandline arguments. However, what if you use the tool so often that you generate the same template or the same group of templates over and over again. Shortcuts are a way for you to bypass the prompt and get the code you need. This way, you can alias long cli arguments to this tool on your computer for shorter code generation.
+
+### In Progress
+- CLI arguments for quicker template navigation
+  - Template Category Args: Pass in template category options to quickly filter the templats you want by category.
+  - Template Name: Pass in a template name to quickly generate the template you use most often.
+  - Template Groups: Pass in a group of template names to quickly generate a group of code you use most often.
 
 ## Contribute
 To get started, clone the project on your machine and run `npm install`. From here you can run `npm run start` to execute the project, but if you'd like to run the project as a global commnand, run `npm run bin:up` to symlink the project to your global node bin folder. The command to run the project from there will be `makeReact`. When you make changes and want to reflect them in the global command, run `npm run bin` to unlink and relink the project. When you're finished with the symlink, run `npm run bin:down` to remove the symlink.

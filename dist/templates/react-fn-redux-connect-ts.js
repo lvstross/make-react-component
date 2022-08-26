@@ -14,7 +14,7 @@ export interface Props {
 
 const Component = ({ name, count, increment }: Props) => {
     return (
-        <div onPress={() => increment(count += 1)}>
+        <div onPress={() => increment(count + 1)}>
             <p>{name} is {count} years old.</p>
         </div>
     );
