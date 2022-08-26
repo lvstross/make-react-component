@@ -5,7 +5,7 @@ export enum Platform {
 }
 
 export enum Shape {
-    FUNCTION = 'FUNCTION',
+    FUNCTION = 'FUNC',
     CLASS = 'CLASS',
     MIXED = 'MIXED'
 }

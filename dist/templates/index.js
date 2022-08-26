@@ -96,7 +96,7 @@ exports.templateOptions = [
     {
         alias: 'react-native-fn-js',
         description: 'React Native functional component in Javascript',
-        platform: types_1.Platform.NATIVE,
+        platform: types_1.Platform.MOBILE,
         shape: types_1.Shape.FUNCTION,
         syntax: types_1.Syntax.JS,
         template: react_native_fn_js_1.default,
@@ -105,7 +105,7 @@ exports.templateOptions = [
     {
         alias: 'react-native-fn-ts',
         description: 'React Native functional component in Typescript',
-        platform: types_1.Platform.NATIVE,
+        platform: types_1.Platform.MOBILE,
         shape: types_1.Shape.FUNCTION,
         syntax: types_1.Syntax.TS,
         template: react_native_fn_ts_1.default,

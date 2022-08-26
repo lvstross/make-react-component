@@ -13,9 +13,13 @@ export enum FilterOption {
   CLASS = 'class',
   FUNC = 'func',
   JS = 'js',
-  TS = 'ts'
+  TS = 'ts',
+  JSX = 'jsx',
+  TSX = 'tsx'
 }
 
 export interface Options {
-  filter: FilterOption[];
+  filter?: FilterOption[];
+  template?: string;
+  group?: string[];
 }

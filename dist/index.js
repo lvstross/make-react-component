@@ -19,16 +19,39 @@ const helpers_1 = require("./helpers");
 const utils_1 = require("./utils");
 const constants_1 = require("./constants");
 const templates_1 = require("./templates");
-const options = (0, command_line_args_1.default)(constants_1.optionDefs);
-const dirPath = (0, helpers_1.getDirPath)();
 (() => __awaiter(void 0, void 0, void 0, function* () {
     console.clear();
-    console.log('options: ', options);
     console.log('Welcome To Make React Component\n');
+    const options = (0, command_line_args_1.default)(constants_1.optionDefs);
+    const dirPath = (0, helpers_1.getDirPath)();
+    const filters = (options === null || options === void 0 ? void 0 : options.filter) || [];
+    const template = (options === null || options === void 0 ? void 0 : options.template) || '';
+    const group = (options === null || options === void 0 ? void 0 : options.group) || [];
+    let choices = [];
+    if (filters.length > 0) {
+        const filteredTemplateOptions = (0, utils_1.getFilteredTemplateOptions)(filters);
+        choices = (0, utils_1.displayFilteredOptions)(filteredTemplateOptions);
+    }
+    else {
+        choices = (0, utils_1.diplayTemplateOptions)();
+    }
+    if (template !== '') {
+    }
+    if (group.length > 0) {
+    }
     try {
         let selecting = true;
         while (selecting) {
-            const answers = yield inquirer_1.default.prompt(constants_1.mainPrompts);
+            const answers = yield inquirer_1.default.prompt([
+                {
+                    name: 'template',
+                    message: `Choose a template: \n\n`,
+                    choices,
+                    type: 'list',
+                    default: constants_1.defaults.defaultTemplate,
+                    loop: false
+                }
+            ]);
             const output = (0, utils_1.parseAnswers)(answers);
             const template = templates_1.templateOptions.find((opt) => opt.alias === output);
             console.log('CODE:=============================================');

@@ -4,12 +4,12 @@ exports.File = exports.Syntax = exports.Shape = exports.Platform = void 0;
 var Platform;
 (function (Platform) {
     Platform["WEB"] = "WEB";
-    Platform["NATIVE"] = "NATIVE";
+    Platform["MOBILE"] = "MOBILE";
     Platform["SHARED"] = "SHARED";
 })(Platform = exports.Platform || (exports.Platform = {}));
 var Shape;
 (function (Shape) {
-    Shape["FUNCTION"] = "FUNCTION";
+    Shape["FUNCTION"] = "FUNC";
     Shape["CLASS"] = "CLASS";
     Shape["MIXED"] = "MIXED";
 })(Shape = exports.Shape || (exports.Shape = {}));
