@@ -8,6 +8,9 @@ import reactFnReduxConnectTs from './react-fn-redux-connect-ts';
 import reactClReduxConnectTs from './react-cl-redux-connect-ts';
 import reactNativeFnJs from './react-native-fn-js';
 import reactNativeFnTs from './react-native-fn-ts';
+import reactReduxLegacyJs from './react-redux-legacy-js';
+import reactReduxToolkitJs from './react-redux-toolkit-js';
+import reactReduxReselectJs from './react-redux-reselect-js';
 import { TemplateOption, Platform, Shape, Syntax, File } from './types';
 
 export const templateOptions: TemplateOption[] = [
@@ -100,5 +103,32 @@ export const templateOptions: TemplateOption[] = [
         syntax: Syntax.TS,
         template: reactNativeFnTs,
         fileType: File.TSX
+    },
+    {
+        alias: 'react-redux-legacy-js',
+        description: 'Legacy redux actions, reducers in Javascript',
+        platform: Platform.SHARED,
+        shape: Shape.FUNCTION,
+        syntax: Syntax.JS,
+        template: reactReduxLegacyJs,
+        fileType: File.JS
+    },
+    {
+        alias: 'react-redux-toolkit-js',
+        description: 'Redux toolkit actions, reducers slice in Javascript',
+        platform: Platform.SHARED,
+        shape: Shape.FUNCTION,
+        syntax: Syntax.JS,
+        template: reactReduxToolkitJs,
+        fileType: File.JS
+    },
+    {
+        alias: 'react-redux-reselect-js',
+        description: 'Redux reselect example in Javascript',
+        platform: Platform.SHARED,
+        shape: Shape.FUNCTION,
+        syntax: Syntax.JS,
+        template: reactReduxReselectJs,
+        fileType: File.JS
     },
 ];

@@ -1,6 +1,7 @@
 export enum Platform {
     WEB = 'WEB',
-    NATIVE = 'NATIVE'
+    NATIVE = 'NATIVE',
+    SHARED = 'SHARED'
 }
 
 export enum Shape {
