@@ -5,7 +5,7 @@ const Component = ({ name }) => {
     const [age, setAge] = useState
 
     return (
-        <div onPress={() => setAge(age += 1)}>
+        <div onPress={() => setAge(age + 1)}>
             <p>{name} is {age} years old.</p>
         </div>
     );
