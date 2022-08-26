@@ -11,6 +11,7 @@ import reactNativeFnTs from './react-native-fn-ts';
 import reactReduxLegacyJs from './react-redux-legacy-js';
 import reactReduxToolkitJs from './react-redux-toolkit-js';
 import reactReduxReselectJs from './react-redux-reselect-js';
+import reactReduxToolkitTs from './react-redux-toolkit-ts';
 import { TemplateOption, Platform, Shape, Syntax, File } from './types';
 
 export const templateOptions: TemplateOption[] = [
@@ -130,5 +131,14 @@ export const templateOptions: TemplateOption[] = [
         syntax: Syntax.JS,
         template: reactReduxReselectJs,
         fileType: File.JS
+    },
+    {
+        alias: 'react-redux-toolkit-ts',
+        description: 'Redux toolkit actions, reducers slice in Typescript',
+        platform: Platform.SHARED,
+        shape: Shape.FUNCTION,
+        syntax: Syntax.TS,
+        template: reactReduxToolkitTs,
+        fileType: File.TS
     },
 ];
