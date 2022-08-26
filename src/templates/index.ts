@@ -12,6 +12,7 @@ import reactReduxLegacyJs from './react-redux-legacy-js';
 import reactReduxToolkitJs from './react-redux-toolkit-js';
 import reactReduxReselectJs from './react-redux-reselect-js';
 import reactReduxToolkitTs from './react-redux-toolkit-ts';
+import reactTestLibJestJs from './react-test-lib-jest-js';
 import { TemplateOption, Platform, Shape, Syntax, File } from './types';
 
 export const templateOptions: TemplateOption[] = [
@@ -141,4 +142,13 @@ export const templateOptions: TemplateOption[] = [
         template: reactReduxToolkitTs,
         fileType: File.TS
     },
+    {
+        alias: 'react-test-lib-jest-js',
+        description: 'React testing-library example with Jest',
+        platform: Platform.SHARED,
+        shape: Shape.FUNCTION,
+        syntax: Syntax.JS,
+        template: reactTestLibJestJs,
+        fileType: File.JS
+    }
 ];
