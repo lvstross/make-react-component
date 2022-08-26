@@ -57,7 +57,6 @@ Let's make this tool useful in all cases! Here is a growing wish list of various
 
 - Can generate various cases of react hooks code.
 - Can generate a component using redux hooks code.
-- Can generate redux store, actions, reducers code.
 - Can generate redux thunk code.
 - Can generate redux saga code.
 - Can generate a react router connected component code.
