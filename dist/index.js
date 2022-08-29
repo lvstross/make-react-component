@@ -21,9 +21,10 @@ const helpers_1 = require("./helpers");
 const utils_1 = require("./utils");
 const constants_1 = require("./constants");
 const templates_1 = require("./templates");
+const theme_1 = require("./theme");
 (() => __awaiter(void 0, void 0, void 0, function* () {
     console.clear();
-    console.log('Welcome To Make React Component\n');
+    (0, theme_1.logHeading)('Welcome To Make React Component\n');
     const options = (0, command_line_args_1.default)(constants_1.optionDefs);
     const dirPath = (0, helpers_1.getDirPath)();
     const filters = (options === null || options === void 0 ? void 0 : options.filter) || [];
@@ -41,10 +42,10 @@ const templates_1 = require("./templates");
         const searchTemplateOption = (0, utils_1.getSearchedTemplateOption)(template);
         if (!(0, isNil_1.default)(searchTemplateOption)) {
             (0, utils_1.generateFile)(searchTemplateOption, template);
-            console.log(`${searchTemplateOption === null || searchTemplateOption === void 0 ? void 0 : searchTemplateOption.alias} generated!`);
+            (0, theme_1.logSuccess)(`${searchTemplateOption === null || searchTemplateOption === void 0 ? void 0 : searchTemplateOption.alias} generated!`);
         }
         else {
-            console.log(`Couldn't find ${template}? Try again.`);
+            (0, theme_1.logError)(`No template that matches ${template}. Try again.`);
         }
         process.exit();
     }
@@ -53,10 +54,10 @@ const templates_1 = require("./templates");
             const groupTemplate = (0, utils_1.getSearchedTemplateOption)(g);
             if (!(0, isNil_1.default)(groupTemplate)) {
                 (0, utils_1.generateFile)(groupTemplate, g);
-                console.log(`${g} generated!`);
+                (0, theme_1.logSuccess)(`${g} generated!`);
             }
             else {
-                console.log(`No template match for ${g}`);
+                (0, theme_1.logError)(`No template that matches ${g}. Try again.`);
             }
         });
         process.exit();
@@ -75,13 +76,13 @@ const templates_1 = require("./templates");
             ]);
             const output = (0, utils_1.parseAnswers)(answers);
             const selectedTemplate = (0, utils_1.getSearchedTemplateOption)(output || '');
-            console.log('CODE:=============================================');
-            console.log(selectedTemplate === null || selectedTemplate === void 0 ? void 0 : selectedTemplate.template);
-            console.log('CODE:=============================================');
+            (0, theme_1.logAlert)('CODE:=============================================');
+            (0, theme_1.logCode)((selectedTemplate === null || selectedTemplate === void 0 ? void 0 : selectedTemplate.template) || '');
+            (0, theme_1.logAlert)('CODE:=============================================');
             const confirm = yield inquirer_1.default.prompt(constants_1.confirmPrompt);
             if (confirm.okay) {
                 (0, utils_1.generateFile)(selectedTemplate || templates_1.templateOptions[0]);
-                console.log(`${selectedTemplate === null || selectedTemplate === void 0 ? void 0 : selectedTemplate.alias} generated!`);
+                (0, theme_1.logSuccess)(`${selectedTemplate === null || selectedTemplate === void 0 ? void 0 : selectedTemplate.alias} generated!`);
                 break;
             }
             console.clear();

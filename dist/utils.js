@@ -8,6 +8,7 @@ const fs_1 = require("fs");
 const isEmpty_1 = __importDefault(require("lodash/isEmpty"));
 const helpers_1 = require("./helpers");
 const templates_1 = require("./templates");
+const theme_1 = require("./theme");
 const parseAnswers = (answers) => {
     return (0, exports.parseTemplateOption)(answers.template);
 };
@@ -24,7 +25,7 @@ const generateFile = (temp, fileName) => {
         (0, fs_1.writeFileSync)(`${dirPath}/${fileName || 'Component'}.${temp.fileType}`, temp.template);
     }
     else {
-        console.warn('No template match :(');
+        (0, theme_1.logError)('No template match');
     }
 };
 exports.generateFile = generateFile;

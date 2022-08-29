@@ -4,6 +4,7 @@ import { PromptAnswers, Defaults, FilterOption } from './types';
 import { getDirPath } from './helpers';
 import { TemplateOption } from './templates/types';
 import { templateOptions } from './templates';
+import { logError } from './theme';
 
 export const parseAnswers = (answers: PromptAnswers | Defaults): string | undefined => {
   return parseTemplateOption(answers.template);
@@ -20,7 +21,7 @@ export const generateFile = (temp: TemplateOption, fileName?: string): void => {
     const dirPath = getDirPath();
     writeFileSync(`${dirPath}/${fileName || 'Component'}.${temp.fileType}`, temp.template);
   } else {
-    console.warn('No template match :(');
+    logError('No template match');
   }
 };
 

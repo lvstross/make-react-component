@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import clc from 'cli-color';
 import inquirer from 'inquirer';
 import commandLineArgs from 'command-line-args';
 import isNil from 'lodash/isNil';
@@ -17,10 +18,11 @@ import { optionDefs, confirmPrompt, defaults } from './constants';
 import { templateOptions } from './templates';
 import { TemplateOption } from './templates/types';
 import { Options } from './types';
+import { logError, logAlert, logSuccess, logHeading, logCode } from './theme';
 
 (async () => {
   console.clear();
-  console.log('Welcome To Make React Component\n');
+  logHeading('Welcome To Make React Component\n');
 
   // Handle command line arguments
   const options = commandLineArgs(optionDefs) as Options;
@@ -46,10 +48,10 @@ import { Options } from './types';
     // If template argument found a match, generate the file
     if (!isNil(searchTemplateOption)) {
       generateFile(searchTemplateOption, template);
-      console.log(`${searchTemplateOption?.alias} generated!`);
+      logSuccess(`${searchTemplateOption?.alias} generated!`);
     } else {
       // @NOTE: perhaps log options or any options that are close
-      console.log(`Couldn't find ${template}? Try again.`);
+      logError(`No template that matches ${template}. Try again.`);
     }
     process.exit();
   }
@@ -60,9 +62,9 @@ import { Options } from './types';
       const groupTemplate = getSearchedTemplateOption(g);
       if (!isNil(groupTemplate)) {
         generateFile(groupTemplate, g);
-        console.log(`${g} generated!`);
+        logSuccess(`${g} generated!`);
       } else {
-        console.log(`No template match for ${g}`);
+        logError(`No template that matches ${g}. Try again.`);
       }
     });
     process.exit();
@@ -83,15 +85,15 @@ import { Options } from './types';
       const output: string | undefined = parseAnswers(answers);
       const selectedTemplate: TemplateOption | undefined = getSearchedTemplateOption(output || '');
 
-      console.log('CODE:=============================================');
-      console.log(selectedTemplate?.template);
-      console.log('CODE:=============================================');
+      logAlert('CODE:=============================================');
+      logCode(selectedTemplate?.template || '');
+      logAlert('CODE:=============================================');
 
       const confirm: PromptAnswers = await inquirer.prompt(confirmPrompt);
       
       if (confirm.okay) {
         generateFile(selectedTemplate || templateOptions[0]);
-        console.log(`${selectedTemplate?.alias} generated!`);
+        logSuccess(`${selectedTemplate?.alias} generated!`);
         break;
       }
       console.clear();
