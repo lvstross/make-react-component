@@ -1,28 +1,29 @@
 #!/usr/bin/env node
-import inquirer from 'inquirer';
-import isNil from 'lodash/isNil';
-import isEmpty from 'lodash/isEmpty';
 import commandLineArgs from 'command-line-args';
+import inquirer from 'inquirer';
+import isEmpty from 'lodash/isEmpty';
+import isNil from 'lodash/isNil';
 import {
-  logError,
-  logAlert,
-  logSuccess,
-  logHeading,
-  logCode,
-  parseAnswers,
+  displayFilteredOptions,
+  diplayTemplateOptions,
   generateFile,
   getFilteredTemplateOptions,
-  diplayTemplateOptions,
-  displayFilteredOptions,
-  getSearchedTemplateOption
+  getSearchedTemplateOption,
+  logAlert,
+  logCode,
+  logError,
+  logHeading,
+  logSuccess,
+  parseAnswers
 } from './utils';
 import { templateOptions } from './templates';
 import {
-  SelectionPromptAnswer,
-  ConfirmationPromptAnswer,
   Arguments,
+  ConfirmationPromptAnswer,
+  FilterOption,
+  SelectionPromptAnswer,
   TemplateOption,
-  FilterOption
+  TemplateOptionAlias
 } from './types';
 
 
@@ -38,8 +39,8 @@ import {
   ]) as Arguments;
 
   // Check for options and set fallbacks
-  const template: string = args?.template || '';
-  const group: string[] = args?.group || [];
+  const template: TemplateOptionAlias = args?.template || '';
+  const group: TemplateOptionAlias[] = args?.group || [];
   const filters: FilterOption[] = args?.filter || [];
 
   // If 'template' argument found, the program bypasses prompt
@@ -58,13 +59,13 @@ import {
 
   // If 'group' argument found, the program bypasses prompt
   if (!isEmpty(group)) {
-    group.forEach((g: string) => {
-      const groupTemplate = getSearchedTemplateOption(g);
+    group.forEach((tempOptAlias: TemplateOptionAlias) => {
+      const groupTemplate = getSearchedTemplateOption(tempOptAlias);
       if (!isNil(groupTemplate)) {
-        generateFile(groupTemplate, g);
-        logSuccess(`${g} generated!`);
+        generateFile(groupTemplate, tempOptAlias);
+        logSuccess(`${tempOptAlias} generated!`);
       } else {
-        logError(`No template that matches ${g}. Try again.`);
+        logError(`No template that matches ${tempOptAlias}. Try again.`);
       }
     });
     process.exit();
@@ -95,12 +96,12 @@ import {
     ]);
 
     // Parse the selection and get template for confirmation prompt
-    const output: string | undefined = parseAnswers(selection);
-    const selectedTemplate: TemplateOption | undefined = getSearchedTemplateOption(output || '');
+    const templateAlias: TemplateOptionAlias | undefined = parseAnswers(selection);
+    const selectedTemplateOption: TemplateOption | undefined = getSearchedTemplateOption(templateAlias || '');
 
     // Display template for confirmation prompt
     logAlert('CODE:=============================================');
-    logCode(selectedTemplate?.template || '');
+    logCode(selectedTemplateOption?.template || '');
     logAlert('CODE:=============================================');
 
     const confirmation: ConfirmationPromptAnswer = await inquirer.prompt([
@@ -112,8 +113,8 @@ import {
     ]);
     
     if (confirmation.okay) {
-      generateFile(selectedTemplate || templateOptions[0]);
-      logSuccess(`${selectedTemplate?.alias} generated!`);
+      generateFile(selectedTemplateOption || templateOptions[0]);
+      logSuccess(`${selectedTemplateOption?.alias} generated!`);
       break;
     }
 

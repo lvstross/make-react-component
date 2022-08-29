@@ -19,8 +19,8 @@ export enum FilterOption {
 
 export interface Arguments {
   filter?: FilterOption[];
-  template?: string;
-  group?: string[];
+  template?: TemplateOptionAlias;
+  group?: TemplateOptionAlias[];
 }
 
 export enum Platform {
@@ -47,8 +47,10 @@ export enum File {
   TSX = 'tsx'
 }
 
+export type TemplateOptionAlias = string;
+
 export interface TemplateOption {
-  alias: string;
+  alias: TemplateOptionAlias;
   description: string;
   platform: Platform;
   shape: Shape;
