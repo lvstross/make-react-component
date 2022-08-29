@@ -1,4 +1,5 @@
 import { writeFileSync } from 'fs';
+import isEmpty from 'lodash/isEmpty';
 import { PromptAnswers, Defaults, FilterOption } from './types';
 import { getDirPath } from './helpers';
 import { TemplateOption } from './templates/types';
@@ -14,12 +15,12 @@ export const parseTemplateOption = (tempOpt: string) => {
   return captured?.[1];
 };
 
-export const generateFile = (temp: TemplateOption): void => {
-  if (temp.alias) {
+export const generateFile = (temp: TemplateOption, fileName?: string): void => {
+  if (!isEmpty(temp.alias)) {
     const dirPath = getDirPath();
-    writeFileSync(`${dirPath}/Component.${temp.fileType}`, temp.template);
+    writeFileSync(`${dirPath}/${fileName || 'Component'}.${temp.fileType}`, temp.template);
   } else {
-    console.warn('Warning: No template match');
+    console.warn('No template match :(');
   }
 };
 
@@ -50,5 +51,11 @@ export const diplayTemplateOptions = () => {
 export const displayFilteredOptions = (temp: TemplateOption[]) => {
   return temp.map((opt: TemplateOption) => {
     return `[${opt.alias}]: ${opt.description}`;
+  });
+};
+
+export const getSearchedTemplateOption = (temp: string): TemplateOption | undefined => {
+  return templateOptions.find((t: TemplateOption) => {
+    return t.alias === temp;
   });
 };

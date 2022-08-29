@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import inquirer from 'inquirer';
 import commandLineArgs from 'command-line-args';
+import isNil from 'lodash/isNil';
+import isEmpty from 'lodash/isEmpty';
 import { PromptAnswers } from './types';
 import { getDirPath } from './helpers';
 import {
@@ -8,7 +10,8 @@ import {
   generateFile,
   getFilteredTemplateOptions,
   diplayTemplateOptions,
-  displayFilteredOptions
+  displayFilteredOptions,
+  getSearchedTemplateOption
 } from './utils';
 import { optionDefs, confirmPrompt, defaults } from './constants';
 import { templateOptions } from './templates';
@@ -27,25 +30,46 @@ import { Options } from './types';
   const template = options?.template || '';
   const group = options?.group || [];
 
+  // If filter argument found, proceed to prompt with filtered options
+  // that match filter arguments
   let choices = [];
-  if (filters.length > 0) {
+  if (!isEmpty(filters)) {
     const filteredTemplateOptions = getFilteredTemplateOptions(filters);
     choices = displayFilteredOptions(filteredTemplateOptions);
   } else {
     choices = diplayTemplateOptions();
   }
 
+  // If template argument found, the program bypasses prompt
   if (template !== '') {
-    // get TemplateOption by template alias and proceed to generate template
+    const searchTemplateOption = getSearchedTemplateOption(template);
+    // If template argument found a match, generate the file
+    if (!isNil(searchTemplateOption)) {
+      generateFile(searchTemplateOption, template);
+      console.log(`${searchTemplateOption?.alias} generated!`);
+    } else {
+      // @NOTE: perhaps log options or any options that are close
+      console.log(`Couldn't find ${template}? Try again.`);
+    }
+    process.exit();
   }
 
-  if (group.length > 0) {
-    // get TemplateOptions by template aliass and proceed to generate all chosen templates
+  // If group argument found, the program bypasses prompt
+  if (!isEmpty(group)) {
+    group.forEach((g: string) => {
+      const groupTemplate = getSearchedTemplateOption(g);
+      if (!isNil(groupTemplate)) {
+        generateFile(groupTemplate, g);
+        console.log(`${g} generated!`);
+      } else {
+        console.log(`No template match for ${g}`);
+      }
+    });
+    process.exit();
   }
 
   try {
-    let selecting = true;
-    while (selecting) {
+    while (true) {
       const answers: PromptAnswers = await inquirer.prompt([
         {
           name: 'template',
@@ -57,19 +81,18 @@ import { Options } from './types';
         }
       ]);
       const output: string | undefined = parseAnswers(answers);
-      const template: TemplateOption | undefined = templateOptions.find((opt: TemplateOption) => opt.alias === output);
+      const selectedTemplate: TemplateOption | undefined = getSearchedTemplateOption(output || '');
 
       console.log('CODE:=============================================');
-      console.log(template?.template);
+      console.log(selectedTemplate?.template);
       console.log('CODE:=============================================');
 
       const confirm: PromptAnswers = await inquirer.prompt(confirmPrompt);
       
       if (confirm.okay) {
-        generateFile(template || templateOptions[0]);
-        console.log(`${template?.alias} generated!`);
-        selecting = false;
-        process.exit();
+        generateFile(selectedTemplate || templateOptions[0]);
+        console.log(`${selectedTemplate?.alias} generated!`);
+        break;
       }
       console.clear();
     }

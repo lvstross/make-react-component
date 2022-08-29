@@ -15,6 +15,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const inquirer_1 = __importDefault(require("inquirer"));
 const command_line_args_1 = __importDefault(require("command-line-args"));
+const isNil_1 = __importDefault(require("lodash/isNil"));
+const isEmpty_1 = __importDefault(require("lodash/isEmpty"));
 const helpers_1 = require("./helpers");
 const utils_1 = require("./utils");
 const constants_1 = require("./constants");
@@ -28,7 +30,7 @@ const templates_1 = require("./templates");
     const template = (options === null || options === void 0 ? void 0 : options.template) || '';
     const group = (options === null || options === void 0 ? void 0 : options.group) || [];
     let choices = [];
-    if (filters.length > 0) {
+    if (!(0, isEmpty_1.default)(filters)) {
         const filteredTemplateOptions = (0, utils_1.getFilteredTemplateOptions)(filters);
         choices = (0, utils_1.displayFilteredOptions)(filteredTemplateOptions);
     }
@@ -36,12 +38,31 @@ const templates_1 = require("./templates");
         choices = (0, utils_1.diplayTemplateOptions)();
     }
     if (template !== '') {
+        const searchTemplateOption = (0, utils_1.getSearchedTemplateOption)(template);
+        if (!(0, isNil_1.default)(searchTemplateOption)) {
+            (0, utils_1.generateFile)(searchTemplateOption, template);
+            console.log(`${searchTemplateOption === null || searchTemplateOption === void 0 ? void 0 : searchTemplateOption.alias} generated!`);
+        }
+        else {
+            console.log(`Couldn't find ${template}? Try again.`);
+        }
+        process.exit();
     }
-    if (group.length > 0) {
+    if (!(0, isEmpty_1.default)(group)) {
+        group.forEach((g) => {
+            const groupTemplate = (0, utils_1.getSearchedTemplateOption)(g);
+            if (!(0, isNil_1.default)(groupTemplate)) {
+                (0, utils_1.generateFile)(groupTemplate, g);
+                console.log(`${g} generated!`);
+            }
+            else {
+                console.log(`No template match for ${g}`);
+            }
+        });
+        process.exit();
     }
     try {
-        let selecting = true;
-        while (selecting) {
+        while (true) {
             const answers = yield inquirer_1.default.prompt([
                 {
                     name: 'template',
@@ -53,16 +74,15 @@ const templates_1 = require("./templates");
                 }
             ]);
             const output = (0, utils_1.parseAnswers)(answers);
-            const template = templates_1.templateOptions.find((opt) => opt.alias === output);
+            const selectedTemplate = (0, utils_1.getSearchedTemplateOption)(output || '');
             console.log('CODE:=============================================');
-            console.log(template === null || template === void 0 ? void 0 : template.template);
+            console.log(selectedTemplate === null || selectedTemplate === void 0 ? void 0 : selectedTemplate.template);
             console.log('CODE:=============================================');
             const confirm = yield inquirer_1.default.prompt(constants_1.confirmPrompt);
             if (confirm.okay) {
-                (0, utils_1.generateFile)(template || templates_1.templateOptions[0]);
-                console.log(`${template === null || template === void 0 ? void 0 : template.alias} generated!`);
-                selecting = false;
-                process.exit();
+                (0, utils_1.generateFile)(selectedTemplate || templates_1.templateOptions[0]);
+                console.log(`${selectedTemplate === null || selectedTemplate === void 0 ? void 0 : selectedTemplate.alias} generated!`);
+                break;
             }
             console.clear();
         }
