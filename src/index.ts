@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import clc from 'cli-color';
 import inquirer from 'inquirer';
 import commandLineArgs from 'command-line-args';
 import isNil from 'lodash/isNil';
