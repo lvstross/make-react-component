@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const inquirer_1 = __importDefault(require("inquirer"));
-const isNil_1 = __importDefault(require("lodash/isNil"));
-const isEmpty_1 = __importDefault(require("lodash/isEmpty"));
 const command_line_args_1 = __importDefault(require("command-line-args"));
+const inquirer_1 = __importDefault(require("inquirer"));
+const isEmpty_1 = __importDefault(require("lodash/isEmpty"));
+const isNil_1 = __importDefault(require("lodash/isNil"));
 const utils_1 = require("./utils");
 const templates_1 = require("./templates");
 (() => __awaiter(void 0, void 0, void 0, function* () {
@@ -42,14 +42,14 @@ const templates_1 = require("./templates");
         process.exit();
     }
     if (!(0, isEmpty_1.default)(group)) {
-        group.forEach((g) => {
-            const groupTemplate = (0, utils_1.getSearchedTemplateOption)(g);
+        group.forEach((tempOptAlias) => {
+            const groupTemplate = (0, utils_1.getSearchedTemplateOption)(tempOptAlias);
             if (!(0, isNil_1.default)(groupTemplate)) {
-                (0, utils_1.generateFile)(groupTemplate, g);
-                (0, utils_1.logSuccess)(`${g} generated!`);
+                (0, utils_1.generateFile)(groupTemplate, tempOptAlias);
+                (0, utils_1.logSuccess)(`${tempOptAlias} generated!`);
             }
             else {
-                (0, utils_1.logError)(`No template that matches ${g}. Try again.`);
+                (0, utils_1.logError)(`No template that matches ${tempOptAlias}. Try again.`);
             }
         });
         process.exit();
@@ -73,10 +73,10 @@ const templates_1 = require("./templates");
                 loop: false
             }
         ]);
-        const output = (0, utils_1.parseAnswers)(selection);
-        const selectedTemplate = (0, utils_1.getSearchedTemplateOption)(output || '');
+        const templateAlias = (0, utils_1.parseAnswers)(selection);
+        const selectedTemplateOption = (0, utils_1.getSearchedTemplateOption)(templateAlias || '');
         (0, utils_1.logAlert)('CODE:=============================================');
-        (0, utils_1.logCode)((selectedTemplate === null || selectedTemplate === void 0 ? void 0 : selectedTemplate.template) || '');
+        (0, utils_1.logCode)((selectedTemplateOption === null || selectedTemplateOption === void 0 ? void 0 : selectedTemplateOption.template) || '');
         (0, utils_1.logAlert)('CODE:=============================================');
         const confirmation = yield inquirer_1.default.prompt([
             {
@@ -86,8 +86,8 @@ const templates_1 = require("./templates");
             }
         ]);
         if (confirmation.okay) {
-            (0, utils_1.generateFile)(selectedTemplate || templates_1.templateOptions[0]);
-            (0, utils_1.logSuccess)(`${selectedTemplate === null || selectedTemplate === void 0 ? void 0 : selectedTemplate.alias} generated!`);
+            (0, utils_1.generateFile)(selectedTemplateOption || templates_1.templateOptions[0]);
+            (0, utils_1.logSuccess)(`${selectedTemplateOption === null || selectedTemplateOption === void 0 ? void 0 : selectedTemplateOption.alias} generated!`);
             break;
         }
         console.clear();
