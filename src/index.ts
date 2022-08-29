@@ -4,7 +4,6 @@ import commandLineArgs from 'command-line-args';
 import isNil from 'lodash/isNil';
 import isEmpty from 'lodash/isEmpty';
 import { PromptAnswers } from './types';
-import { getDirPath } from './helpers';
 import {
   parseAnswers,
   generateFile,
@@ -25,7 +24,6 @@ import { logError, logAlert, logSuccess, logHeading, logCode } from './theme';
 
   // Handle command line arguments
   const options = commandLineArgs(optionDefs) as Options;
-  const dirPath = getDirPath();
 
   const filters = options?.filter || [];
   const template = options?.template || '';
