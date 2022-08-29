@@ -13,7 +13,7 @@ import reactReduxToolkitJs from './react-redux-toolkit-js';
 import reactReduxReselectJs from './react-redux-reselect-js';
 import reactReduxToolkitTs from './react-redux-toolkit-ts';
 import reactTestLibJestJs from './react-test-lib-jest-js';
-import { TemplateOption, Platform, Shape, Syntax, File } from './types';
+import { TemplateOption, Platform, Shape, Syntax, File } from '../types';
 
 export const templateOptions: TemplateOption[] = [
     {

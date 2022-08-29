@@ -19,31 +19,25 @@ const isEmpty_1 = __importDefault(require("lodash/isEmpty"));
 const command_line_args_1 = __importDefault(require("command-line-args"));
 const utils_1 = require("./utils");
 const templates_1 = require("./templates");
-const constants_1 = require("./constants");
-const theme_1 = require("./theme");
 (() => __awaiter(void 0, void 0, void 0, function* () {
     console.clear();
-    (0, theme_1.logHeading)('Welcome To Make React Component\n');
-    const options = (0, command_line_args_1.default)(constants_1.optionDefs);
-    const filters = (options === null || options === void 0 ? void 0 : options.filter) || [];
-    const template = (options === null || options === void 0 ? void 0 : options.template) || '';
-    const group = (options === null || options === void 0 ? void 0 : options.group) || [];
-    let choices = [];
-    if (!(0, isEmpty_1.default)(filters)) {
-        const filteredTemplateOptions = (0, utils_1.getFilteredTemplateOptions)(filters);
-        choices = (0, utils_1.displayFilteredOptions)(filteredTemplateOptions);
-    }
-    else {
-        choices = (0, utils_1.diplayTemplateOptions)();
-    }
+    (0, utils_1.logHeading)('Welcome To Make React Component\n');
+    const args = (0, command_line_args_1.default)([
+        { name: 'template', alias: 't', type: String },
+        { name: 'group', alias: 'g', type: String, multiple: true },
+        { name: 'filter', alias: 'f', type: String, multiple: true }
+    ]);
+    const template = (args === null || args === void 0 ? void 0 : args.template) || '';
+    const group = (args === null || args === void 0 ? void 0 : args.group) || [];
+    const filters = (args === null || args === void 0 ? void 0 : args.filter) || [];
     if (template !== '') {
         const searchTemplateOption = (0, utils_1.getSearchedTemplateOption)(template);
         if (!(0, isNil_1.default)(searchTemplateOption)) {
             (0, utils_1.generateFile)(searchTemplateOption, template);
-            (0, theme_1.logSuccess)(`${searchTemplateOption === null || searchTemplateOption === void 0 ? void 0 : searchTemplateOption.alias} generated!`);
+            (0, utils_1.logSuccess)(`${searchTemplateOption === null || searchTemplateOption === void 0 ? void 0 : searchTemplateOption.alias} generated!`);
         }
         else {
-            (0, theme_1.logError)(`No template that matches ${template}. Try again.`);
+            (0, utils_1.logError)(`No template that matches ${template}. Try again.`);
         }
         process.exit();
     }
@@ -52,41 +46,50 @@ const theme_1 = require("./theme");
             const groupTemplate = (0, utils_1.getSearchedTemplateOption)(g);
             if (!(0, isNil_1.default)(groupTemplate)) {
                 (0, utils_1.generateFile)(groupTemplate, g);
-                (0, theme_1.logSuccess)(`${g} generated!`);
+                (0, utils_1.logSuccess)(`${g} generated!`);
             }
             else {
-                (0, theme_1.logError)(`No template that matches ${g}. Try again.`);
+                (0, utils_1.logError)(`No template that matches ${g}. Try again.`);
             }
         });
         process.exit();
     }
-    try {
-        while (true) {
-            const answers = yield inquirer_1.default.prompt([
-                {
-                    name: 'template',
-                    message: `Choose a template: \n\n`,
-                    choices,
-                    type: 'list',
-                    default: constants_1.defaults.defaultTemplate,
-                    loop: false
-                }
-            ]);
-            const output = (0, utils_1.parseAnswers)(answers);
-            const selectedTemplate = (0, utils_1.getSearchedTemplateOption)(output || '');
-            (0, theme_1.logAlert)('CODE:=============================================');
-            (0, theme_1.logCode)((selectedTemplate === null || selectedTemplate === void 0 ? void 0 : selectedTemplate.template) || '');
-            (0, theme_1.logAlert)('CODE:=============================================');
-            const confirm = yield inquirer_1.default.prompt(constants_1.confirmPrompt);
-            if (confirm.okay) {
-                (0, utils_1.generateFile)(selectedTemplate || templates_1.templateOptions[0]);
-                (0, theme_1.logSuccess)(`${selectedTemplate === null || selectedTemplate === void 0 ? void 0 : selectedTemplate.alias} generated!`);
-                break;
-            }
-            console.clear();
-        }
+    let choices = [];
+    if (!(0, isEmpty_1.default)(filters)) {
+        const filteredTemplateOptions = (0, utils_1.getFilteredTemplateOptions)(filters);
+        choices = (0, utils_1.displayFilteredOptions)(filteredTemplateOptions);
     }
-    catch (error) {
-        throw Error(error);
+    else {
+        choices = (0, utils_1.diplayTemplateOptions)();
+    }
+    while (true) {
+        const selection = yield inquirer_1.default.prompt([
+            {
+                name: 'template',
+                message: `Choose a template: \n\n`,
+                choices,
+                type: 'list',
+                default: `[${templates_1.templateOptions[0].alias}]: ${templates_1.templateOptions[0].description}`,
+                loop: false
+            }
+        ]);
+        const output = (0, utils_1.parseAnswers)(selection);
+        const selectedTemplate = (0, utils_1.getSearchedTemplateOption)(output || '');
+        (0, utils_1.logAlert)('CODE:=============================================');
+        (0, utils_1.logCode)((selectedTemplate === null || selectedTemplate === void 0 ? void 0 : selectedTemplate.template) || '');
+        (0, utils_1.logAlert)('CODE:=============================================');
+        const confirmation = yield inquirer_1.default.prompt([
+            {
+                name: 'okay',
+                message: 'Is this OK?',
+                type: 'confirm'
+            }
+        ]);
+        if (confirmation.okay) {
+            (0, utils_1.generateFile)(selectedTemplate || templates_1.templateOptions[0]);
+            (0, utils_1.logSuccess)(`${selectedTemplate === null || selectedTemplate === void 0 ? void 0 : selectedTemplate.alias} generated!`);
+            break;
+        }
+        console.clear();
     }
 }))();

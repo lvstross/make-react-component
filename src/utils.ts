@@ -1,13 +1,22 @@
+import clc from 'cli-color';
 import { writeFileSync } from 'fs';
 import isEmpty from 'lodash/isEmpty';
-import { PromptAnswers, Defaults, FilterOption } from './types';
-import { TemplateOption } from './templates/types';
 import { templateOptions } from './templates';
-import { logError } from './theme';
+import { SelectionPromptAnswer, FilterOption, TemplateOption } from './types';
+
+export const logError = (msg: string) => console.log(clc.redBright(msg));
+
+export const logAlert = (msg: string) => console.log(clc.yellowBright(msg));
+
+export const logSuccess = (msg: string) => console.log(clc.greenBright(msg));
+
+export const logCode = (code: string) => console.log(clc.greenBright(code));
+
+export const logHeading = (txt: string) => console.log(clc.cyanBright(txt));
 
 export const getDirPath = (): string => `${process.env.INIT_CWD || process.env.PWD}`;
 
-export const parseAnswers = (answers: PromptAnswers | Defaults): string | undefined => {
+export const parseAnswers = (answers: SelectionPromptAnswer): string | undefined => {
   return parseTemplateOption(answers.template);
 };
 

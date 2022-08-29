@@ -19,7 +19,7 @@ const react_redux_toolkit_js_1 = __importDefault(require("./react-redux-toolkit-
 const react_redux_reselect_js_1 = __importDefault(require("./react-redux-reselect-js"));
 const react_redux_toolkit_ts_1 = __importDefault(require("./react-redux-toolkit-ts"));
 const react_test_lib_jest_js_1 = __importDefault(require("./react-test-lib-jest-js"));
-const types_1 = require("./types");
+const types_1 = require("../types");
 exports.templateOptions = [
     {
         alias: 'react-fn-js',

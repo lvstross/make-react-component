@@ -9,7 +9,7 @@ class Component extends Component {
 
     render() {
         return (
-            <p>{name}</p>
+            <p>{this.props.name}</p>
         );
     };
 }

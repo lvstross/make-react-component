@@ -3,11 +3,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getSearchedTemplateOption = exports.displayFilteredOptions = exports.diplayTemplateOptions = exports.getFilteredTemplateOptions = exports.generateFile = exports.parseTemplateOption = exports.parseAnswers = exports.getDirPath = void 0;
+exports.getSearchedTemplateOption = exports.displayFilteredOptions = exports.diplayTemplateOptions = exports.getFilteredTemplateOptions = exports.generateFile = exports.parseTemplateOption = exports.parseAnswers = exports.getDirPath = exports.logHeading = exports.logCode = exports.logSuccess = exports.logAlert = exports.logError = void 0;
+const cli_color_1 = __importDefault(require("cli-color"));
 const fs_1 = require("fs");
 const isEmpty_1 = __importDefault(require("lodash/isEmpty"));
 const templates_1 = require("./templates");
-const theme_1 = require("./theme");
+const logError = (msg) => console.log(cli_color_1.default.redBright(msg));
+exports.logError = logError;
+const logAlert = (msg) => console.log(cli_color_1.default.yellowBright(msg));
+exports.logAlert = logAlert;
+const logSuccess = (msg) => console.log(cli_color_1.default.greenBright(msg));
+exports.logSuccess = logSuccess;
+const logCode = (code) => console.log(cli_color_1.default.greenBright(code));
+exports.logCode = logCode;
+const logHeading = (txt) => console.log(cli_color_1.default.cyanBright(txt));
+exports.logHeading = logHeading;
 const getDirPath = () => `${process.env.INIT_CWD || process.env.PWD}`;
 exports.getDirPath = getDirPath;
 const parseAnswers = (answers) => {
@@ -26,7 +36,7 @@ const generateFile = (temp, fileName) => {
         (0, fs_1.writeFileSync)(`${dirPath}/${fileName || 'Component'}.${temp.fileType}`, temp.template);
     }
     else {
-        (0, theme_1.logError)('No template match');
+        (0, exports.logError)('No template match');
     }
 };
 exports.generateFile = generateFile;
