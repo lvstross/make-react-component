@@ -1,10 +1,11 @@
 import { writeFileSync } from 'fs';
 import isEmpty from 'lodash/isEmpty';
 import { PromptAnswers, Defaults, FilterOption } from './types';
-import { getDirPath } from './helpers';
 import { TemplateOption } from './templates/types';
 import { templateOptions } from './templates';
 import { logError } from './theme';
+
+export const getDirPath = (): string => `${process.env.INIT_CWD || process.env.PWD}`;
 
 export const parseAnswers = (answers: PromptAnswers | Defaults): string | undefined => {
   return parseTemplateOption(answers.template);

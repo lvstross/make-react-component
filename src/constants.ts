@@ -1,6 +1,5 @@
 import { OptionDefinition } from 'command-line-args';
 import { templateOptions } from './templates';
-import { TemplateOption } from './templates/types';
 
 // Handle options
 export const optionDefs: OptionDefinition[] = [

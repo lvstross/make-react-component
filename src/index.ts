@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 import inquirer from 'inquirer';
-import commandLineArgs from 'command-line-args';
 import isNil from 'lodash/isNil';
 import isEmpty from 'lodash/isEmpty';
-import { PromptAnswers } from './types';
+import commandLineArgs from 'command-line-args';
 import {
   parseAnswers,
   generateFile,
@@ -12,10 +11,10 @@ import {
   displayFilteredOptions,
   getSearchedTemplateOption
 } from './utils';
-import { optionDefs, confirmPrompt, defaults } from './constants';
 import { templateOptions } from './templates';
 import { TemplateOption } from './templates/types';
-import { Options } from './types';
+import { PromptAnswers, Options } from './types';
+import { optionDefs, confirmPrompt, defaults } from './constants';
 import { logError, logAlert, logSuccess, logHeading, logCode } from './theme';
 
 (async () => {

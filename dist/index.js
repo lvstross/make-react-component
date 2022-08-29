@@ -14,12 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const inquirer_1 = __importDefault(require("inquirer"));
-const command_line_args_1 = __importDefault(require("command-line-args"));
 const isNil_1 = __importDefault(require("lodash/isNil"));
 const isEmpty_1 = __importDefault(require("lodash/isEmpty"));
+const command_line_args_1 = __importDefault(require("command-line-args"));
 const utils_1 = require("./utils");
-const constants_1 = require("./constants");
 const templates_1 = require("./templates");
+const constants_1 = require("./constants");
 const theme_1 = require("./theme");
 (() => __awaiter(void 0, void 0, void 0, function* () {
     console.clear();

@@ -3,12 +3,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getSearchedTemplateOption = exports.displayFilteredOptions = exports.diplayTemplateOptions = exports.getFilteredTemplateOptions = exports.generateFile = exports.parseTemplateOption = exports.parseAnswers = void 0;
+exports.getSearchedTemplateOption = exports.displayFilteredOptions = exports.diplayTemplateOptions = exports.getFilteredTemplateOptions = exports.generateFile = exports.parseTemplateOption = exports.parseAnswers = exports.getDirPath = void 0;
 const fs_1 = require("fs");
 const isEmpty_1 = __importDefault(require("lodash/isEmpty"));
-const helpers_1 = require("./helpers");
 const templates_1 = require("./templates");
 const theme_1 = require("./theme");
+const getDirPath = () => `${process.env.INIT_CWD || process.env.PWD}`;
+exports.getDirPath = getDirPath;
 const parseAnswers = (answers) => {
     return (0, exports.parseTemplateOption)(answers.template);
 };
@@ -21,7 +22,7 @@ const parseTemplateOption = (tempOpt) => {
 exports.parseTemplateOption = parseTemplateOption;
 const generateFile = (temp, fileName) => {
     if (!(0, isEmpty_1.default)(temp.alias)) {
-        const dirPath = (0, helpers_1.getDirPath)();
+        const dirPath = (0, exports.getDirPath)();
         (0, fs_1.writeFileSync)(`${dirPath}/${fileName || 'Component'}.${temp.fileType}`, temp.template);
     }
     else {
