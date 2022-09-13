@@ -45,6 +45,7 @@ import {
 
   // If 'template' argument found, the program bypasses prompt
   if (template !== '') {
+    // @BUG: -t crashes if multiple options are passed in
     const searchTemplateOption = getSearchedTemplateOption(template);
     // If template argument found a match, generate the file
     if (!isNil(searchTemplateOption)) {

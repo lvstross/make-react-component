@@ -28,15 +28,34 @@ See the full list of available templates [here](https://github.com/lvstross/make
 
 ## Shortcuts
 
-Coming Soon:
-The program already guides you through the process with a prompt, making it easy to find a template and generate it with out having to know any command line arguments. However, what if you use the tool so often that you generate the same template or the same group of templates over and over again. Shortcuts are a way for you to bypass the prompt and get the code you need. This way, you can alias long cli arguments to this tool on your computer for shorter code generation.
+The program already guides you through the process with a prompt, making it easy to find a template and generate it with out having to know any command line arguments. However, what if you use the tool so often that you generate the same template or the same group of templates over and over again.
 
-### In Progress
+### Filter
 
-- CLI arguments for quicker template navigation
-  - Template Category Args: Pass in template category options to quickly filter the templates you want by category.
-  - Template Name: Pass in a template name to quickly generate the template you use most often.
-  - Template Groups: Pass in a group of template names to quickly generate a group of code you use most often.
+Get a list of templates that fit your filter selection. Filter is a waterfall approach so any template that matches any filter you pass in will show even if it doesn't match other filters.
+```
+makeReact [-f|--filter] [<web|mobile|class|func|js|ts|jsx|tsx>]
+
+Example: makeReact -f native jsx
+```
+
+### Template
+
+Generate an exact template just by using it's template alias, bypassing the prompt all together.
+```
+makeReact [-t|--template] <template-alias>
+
+Example: makeReact -t react-fn-ts
+```
+
+### Group
+
+Same as `template` but generate many templates
+```
+makeReact [-g|--group] [<template-alias>]
+
+Example: makeReact -t react-fn-ts react-redux-toolkit-ts react-test-lib-jest-js
+```
 
 ## Contribute
 

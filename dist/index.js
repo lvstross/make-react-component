@@ -31,6 +31,7 @@ const templates_1 = require("./templates");
     const group = (args === null || args === void 0 ? void 0 : args.group) || [];
     const filters = (args === null || args === void 0 ? void 0 : args.filter) || [];
     if (template !== '') {
+        console.log('template', template);
         const searchTemplateOption = (0, utils_1.getSearchedTemplateOption)(template);
         if (!(0, isNil_1.default)(searchTemplateOption)) {
             (0, utils_1.generateFile)(searchTemplateOption, template);
