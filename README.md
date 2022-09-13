@@ -73,7 +73,7 @@ However, here are some general conventions to stick to:
 
 ## Wishlist
 
-Let's make this tool useful in all cases! Here is a growing wish list of various common react libraries and cases that would be great to have. This wishlist is not priority, if you have a cool ideas submit a PR and let's make it happen.
+Let's make this tool useful in all cases! Here is a growing wish list of various common react libraries and cases that would be great to have. This wishlist is not priority, if you have a cool idea submit a PR and let's make it happen.
 
 - Can generate various cases of react hooks code.
 - Can generate a component using redux hooks code.
