@@ -53,7 +53,7 @@ The current architecture of the project was geared towards making it easier to c
 1. Go into the `src/templates` folder and create a template file that simply exports a multi-line string.
 2. Open up the `src/templates/index.ts` file and add a `TemplateOption` to the `templateOptions` array with your file and it's configuration.
 
-There are plenty of examples already in place, just simply follow the pattern that is layed out already.
+There are plenty of examples already in place, just simply follow the pattern that is laid out already.
 
 However, here are some general conventions to stick to:
 
