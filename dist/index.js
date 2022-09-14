@@ -23,27 +23,13 @@ const templates_1 = require("./templates");
     console.clear();
     (0, utils_1.logHeading)('Welcome To Make React Component\n');
     const args = (0, command_line_args_1.default)([
-        { name: 'template', alias: 't', type: String },
-        { name: 'group', alias: 'g', type: String, multiple: true },
+        { name: 'templates', alias: 't', type: String, multiple: true },
         { name: 'filter', alias: 'f', type: String, multiple: true }
     ]);
-    const template = (args === null || args === void 0 ? void 0 : args.template) || '';
-    const group = (args === null || args === void 0 ? void 0 : args.group) || [];
+    const templates = (args === null || args === void 0 ? void 0 : args.templates) || [];
     const filters = (args === null || args === void 0 ? void 0 : args.filter) || [];
-    if (template !== '') {
-        console.log('template', template);
-        const searchTemplateOption = (0, utils_1.getSearchedTemplateOption)(template);
-        if (!(0, isNil_1.default)(searchTemplateOption)) {
-            (0, utils_1.generateFile)(searchTemplateOption, template);
-            (0, utils_1.logSuccess)(`${searchTemplateOption === null || searchTemplateOption === void 0 ? void 0 : searchTemplateOption.alias} generated!`);
-        }
-        else {
-            (0, utils_1.logError)(`No template that matches ${template}. Try again.`);
-        }
-        process.exit();
-    }
-    if (!(0, isEmpty_1.default)(group)) {
-        group.forEach((tempOptAlias) => {
+    if (!(0, isEmpty_1.default)(templates)) {
+        templates.forEach((tempOptAlias) => {
             const groupTemplate = (0, utils_1.getSearchedTemplateOption)(tempOptAlias);
             if (!(0, isNil_1.default)(groupTemplate)) {
                 (0, utils_1.generateFile)(groupTemplate, tempOptAlias);

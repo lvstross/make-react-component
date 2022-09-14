@@ -2,7 +2,7 @@
 
 Generate react and react-native components.
 
-<img src="https://github.com/lvstross/make-react-component/blob/main/assets/make-react-component-cli.gif" />
+![gif of prompt view](https://github.com/lvstross/make-react-component/blob/main/assets/make-react-component-cli.gif "Select Template with a Prompt")
 
 ## Table Of Contents
 
@@ -14,7 +14,7 @@ Generate react and react-native components.
 
 ## Installation
 
-```
+```bash
 ~ npm install -g make-react-component
 ```
 
@@ -30,29 +30,22 @@ See the full list of available templates [here](https://github.com/lvstross/make
 
 The program already guides you through the process with a prompt, making it easy to find a template and generate it with out having to know any command line arguments. However, what if you use the tool so often that you generate the same template or the same group of templates over and over again.
 
-### Filter
+### Filter - shortcut
 
 Get a list of templates that fit your filter selection. Filter is a waterfall approach so any template that matches any filter you pass in will show even if it doesn't match other filters.
-```
+
+```bash
 makeReact [-f|--filter] [<web|mobile|class|func|js|ts|jsx|tsx>]
 
 Example: makeReact -f native jsx
 ```
 
-### Template
+### Template - shortcut
 
-Generate an exact template just by using it's template alias, bypassing the prompt all together.
-```
-makeReact [-t|--template] <template-alias>
+Generate templates just by using their template alias', bypassing the prompt all together.
 
-Example: makeReact -t react-fn-ts
-```
-
-### Group
-
-Same as `template` but generate many templates
-```
-makeReact [-g|--group] [<template-alias>]
+```bash
+makeReact [-t|--templates] [<template-alias>]
 
 Example: makeReact -t react-fn-ts react-redux-toolkit-ts react-test-lib-jest-js
 ```
@@ -61,7 +54,7 @@ Example: makeReact -t react-fn-ts react-redux-toolkit-ts react-test-lib-jest-js
 
 To get started, clone the project on your machine and run `npm install`. From here you can run `npm run start` to execute the project, but if you'd like to run the project as a global command, run `npm run bin:up` to symlink the project to your global node bin folder. The command to run the project from there will be `makeReact`. When you make changes and want to reflect them in the global command, run `npm run bin` to unlink and relink the project. When you're finished with the symlink, run `npm run bin:down` to remove the symlink.
 
-#### Caveats when unlinking module
+### Caveats when unlinking module
 
 When running `npm run bin:down` you'll notice that this does not run the traditional `npm unlink` command that would normally unlink the project from the global scope. Instead, there is a script that locates the bin directory and removes it manually. `npm unlink` appears to not work well when using `nvm (Node Version Manager)` as your `Nodejs` installer. If you're not using `nvm` this script should still work all the same.
 

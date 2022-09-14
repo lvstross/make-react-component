@@ -19,8 +19,7 @@ export enum FilterOption {
 
 export interface Arguments {
   filter?: FilterOption[];
-  template?: TemplateOptionAlias;
-  group?: TemplateOptionAlias[];
+  templates?: TemplateOptionAlias[];
 }
 
 export enum Platform {

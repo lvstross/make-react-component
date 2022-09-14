@@ -33,34 +33,17 @@ import {
 
   // Command line arguments / options
   const args = commandLineArgs([
-    { name: 'template', alias: 't', type: String },
-    { name: 'group', alias: 'g', type: String, multiple: true },
+    { name: 'templates', alias: 't', type: String, multiple: true },
     { name: 'filter', alias: 'f', type: String, multiple: true }
   ]) as Arguments;
 
   // Check for options and set fallbacks
-  const template: TemplateOptionAlias = args?.template || '';
-  const group: TemplateOptionAlias[] = args?.group || [];
+  const templates: TemplateOptionAlias[] = args?.templates || [];
   const filters: FilterOption[] = args?.filter || [];
 
-  // If 'template' argument found, the program bypasses prompt
-  if (template !== '') {
-    // @BUG: -t crashes if multiple options are passed in
-    const searchTemplateOption = getSearchedTemplateOption(template);
-    // If template argument found a match, generate the file
-    if (!isNil(searchTemplateOption)) {
-      generateFile(searchTemplateOption, template);
-      logSuccess(`${searchTemplateOption?.alias} generated!`);
-    } else {
-      // @NOTE: perhaps log options or any options that are close
-      logError(`No template that matches ${template}. Try again.`);
-    }
-    process.exit();
-  }
-
-  // If 'group' argument found, the program bypasses prompt
-  if (!isEmpty(group)) {
-    group.forEach((tempOptAlias: TemplateOptionAlias) => {
+  // If 'templates' argument found, the program bypasses prompt
+  if (!isEmpty(templates)) {
+    templates.forEach((tempOptAlias: TemplateOptionAlias) => {
       const groupTemplate = getSearchedTemplateOption(tempOptAlias);
       if (!isNil(groupTemplate)) {
         generateFile(groupTemplate, tempOptAlias);
