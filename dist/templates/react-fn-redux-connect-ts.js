@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = `
-import React from 'react';
+exports.default = `import React from 'react';
 import { DispatchProp } from '@types/react-redux';
 // As used here: https://redux.js.org/usage/usage-with-typescript#define-root-state-and-dispatch-types
 import { RootState, AppDispatch } from './store';

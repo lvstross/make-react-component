@@ -1,5 +1,5 @@
-export default `
-import React, { Component } from 'react';
+export default
+`import React, { Component } from 'react';
 
 //props object
 type Numbers={

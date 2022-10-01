@@ -1,6 +1,6 @@
 // From: https://redux.js.org/introduction/why-rtk-is-redux-today
-export default `
-const ADD_TODO = 'ADD_TODO'
+export default
+`const ADD_TODO = 'ADD_TODO'
 const TODO_TOGGLED = 'TODO_TOGGLED'
 
 export const addTodo = text => ({

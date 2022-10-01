@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = `
-import { createSlice } from '@reduxjs/toolkit'
+exports.default = `import { createSlice } from '@reduxjs/toolkit'
 
 const todosSlice = createSlice({
   name: 'todos',

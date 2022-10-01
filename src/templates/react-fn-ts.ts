@@ -1,5 +1,5 @@
-export default `
-import React, { useState } from 'react';
+export default
+`import React, { useState } from 'react';
 
 export interface Props {
     name: string;

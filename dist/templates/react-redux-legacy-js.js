@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = `
-const ADD_TODO = 'ADD_TODO'
+exports.default = `const ADD_TODO = 'ADD_TODO'
 const TODO_TOGGLED = 'TODO_TOGGLED'
 
 export const addTodo = text => ({

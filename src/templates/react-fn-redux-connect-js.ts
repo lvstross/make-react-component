@@ -1,5 +1,5 @@
-export default `
-import React from 'react';
+export default
+`import React from 'react';
 import { connect } from 'react-redux';
 
 const Component = ({ name }) => {

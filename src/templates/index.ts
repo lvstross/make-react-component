@@ -8,9 +8,14 @@ import reactFnReduxConnectTs from './react-fn-redux-connect-ts';
 import reactClReduxConnectTs from './react-cl-redux-connect-ts';
 import reactNativeFnJs from './react-native-fn-js';
 import reactNativeFnTs from './react-native-fn-ts';
+import reactReduxActionsJs from './react-redux-actions-js';
 import reactReduxLegacyJs from './react-redux-legacy-js';
-import reactReduxToolkitJs from './react-redux-toolkit-js';
+import reactReduxReducersJs from './react-redux-reducers-js';
+import reactReduxReducersTs from './react-redux-reducers-ts';
 import reactReduxReselectJs from './react-redux-reselect-js';
+import reactReduxSelectorsJs from './react-redux-selectors-js';
+import reactReduxSelectorsTs from './react-redux-selectors-ts';
+import reactReduxToolkitJs from './react-redux-toolkit-js';
 import reactReduxToolkitTs from './react-redux-toolkit-ts';
 import reactTestLibJestJs from './react-test-lib-jest-js';
 import { TemplateOption, Platform, Shape, Syntax, File } from '../types';
@@ -107,6 +112,15 @@ export const templateOptions: TemplateOption[] = [
         fileType: File.TSX
     },
     {
+        alias: 'react-redux-actions-js',
+        description: 'Redux fetch action file',
+        platform: Platform.SHARED,
+        shape: Shape.MIXED,
+        syntax: Syntax.JS,
+        template: reactReduxActionsJs,
+        fileType: File.JS
+    },
+    {
         alias: 'react-redux-legacy-js',
         description: 'Legacy redux actions, reducers in Javascript',
         platform: Platform.SHARED,
@@ -116,13 +130,22 @@ export const templateOptions: TemplateOption[] = [
         fileType: File.JS
     },
     {
-        alias: 'react-redux-toolkit-js',
-        description: 'Redux toolkit actions, reducers slice in Javascript',
+        alias: 'react-redux-reducers-js',
+        description: 'Redux reducers file',
         platform: Platform.SHARED,
-        shape: Shape.FUNCTION,
+        shape: Shape.MIXED,
         syntax: Syntax.JS,
-        template: reactReduxToolkitJs,
+        template: reactReduxReducersJs,
         fileType: File.JS
+    },
+    {
+        alias: 'react-redux-reducers-ts',
+        description: 'Redux reducers file in Typescript',
+        platform: Platform.SHARED,
+        shape: Shape.MIXED,
+        syntax: Syntax.TS,
+        template: reactReduxReducersTs,
+        fileType: File.TS
     },
     {
         alias: 'react-redux-reselect-js',
@@ -131,6 +154,33 @@ export const templateOptions: TemplateOption[] = [
         shape: Shape.FUNCTION,
         syntax: Syntax.JS,
         template: reactReduxReselectJs,
+        fileType: File.JS
+    },
+    {
+        alias: 'react-redux-selectors-js',
+        description: 'Redux selectors file',
+        platform: Platform.SHARED,
+        shape: Shape.MIXED,
+        syntax: Syntax.JS,
+        template: reactReduxSelectorsJs,
+        fileType: File.JS
+    },
+    {
+        alias: 'react-redux-selectors-ts',
+        description: 'Redux selectors file in Typescript',
+        platform: Platform.SHARED,
+        shape: Shape.MIXED,
+        syntax: Syntax.TS,
+        template: reactReduxSelectorsTs,
+        fileType: File.TS
+    },
+    {
+        alias: 'react-redux-toolkit-js',
+        description: 'Redux toolkit actions, reducers slice in Javascript',
+        platform: Platform.SHARED,
+        shape: Shape.FUNCTION,
+        syntax: Syntax.JS,
+        template: reactReduxToolkitJs,
         fileType: File.JS
     },
     {

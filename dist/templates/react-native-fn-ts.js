@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = `
-import React, { useState } from 'react';
+exports.default = `import React, { useState } from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 
 export interface Props {

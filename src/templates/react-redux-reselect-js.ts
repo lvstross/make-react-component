@@ -1,6 +1,6 @@
 // From: https://github.com/reduxjs/reselect#basic-usage
-export default `
-import { createSelector } from 'reselect'
+export default
+`import { createSelector } from 'reselect'
 
 const selectShopItems = state => state.shop.items
 const selectTaxPercent = state => state.shop.taxPercent

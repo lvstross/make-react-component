@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = `
-import React, { Component } from 'react';
+exports.default = `import React, { Component } from 'react';
 
 //props object
 type Numbers={

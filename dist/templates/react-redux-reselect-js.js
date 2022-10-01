@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = `
-import { createSelector } from 'reselect'
+exports.default = `import { createSelector } from 'reselect'
 
 const selectShopItems = state => state.shop.items
 const selectTaxPercent = state => state.shop.taxPercent

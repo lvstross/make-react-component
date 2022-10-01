@@ -1,5 +1,5 @@
-export default `
-import React, { useState } from 'react';
+export default
+`import React, { useState } from 'react';
 import { DispatchProp } from '@types/react-redux';
 // As used here: https://redux.js.org/usage/usage-with-typescript#define-root-state-and-dispatch-types
 import { RootState, AppDispatch } from './store';

@@ -1,14 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = `
-import React from 'react';
+exports.default = `import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 
 jest.mock('my/module', () => ({
   someModuleExport: jest.fn()
 }));
 
-describe(('test one') => {
+describe('test one', () => {
   const props = {
     onButtonClick: jest.fn()
   };

@@ -1,7 +1,7 @@
 // From: https://redux.js.org/introduction/why-rtk-is-redux-today
 // From: https://redux-toolkit.js.org/usage/usage-with-typescript/
-export default `
-import { createSlice } from '@reduxjs/toolkit'
+export default
+`import { createSlice } from '@reduxjs/toolkit'
 
 const todosSlice = createSlice({
   name: 'todos',

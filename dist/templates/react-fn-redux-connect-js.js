@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = `
-import React from 'react';
+exports.default = `import React from 'react';
 import { connect } from 'react-redux';
 
 const Component = ({ name }) => {

@@ -1,5 +1,5 @@
-export default `
-import React, { useState } from 'react';
+export default
+`import React, { useState } from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 
 const Component = ({ name }) => {

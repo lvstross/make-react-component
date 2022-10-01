@@ -1,5 +1,5 @@
-export default `
-import React, { useState } from 'react';
+export default
+`import React, { useState } from 'react';
 
 const Component = ({ name }) => {
     const [age, setAge] = useState
