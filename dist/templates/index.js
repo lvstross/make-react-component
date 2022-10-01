@@ -134,7 +134,8 @@ exports.templateOptions = [
         shape: types_1.Shape.FUNCTION,
         syntax: types_1.Syntax.JS,
         template: react_redux_legacy_js_1.default,
-        fileType: types_1.File.JS
+        fileType: types_1.File.JS,
+        defaultFileName: 'reducers'
     },
     {
         alias: 'react-redux-reducers-js',
@@ -163,7 +164,8 @@ exports.templateOptions = [
         shape: types_1.Shape.FUNCTION,
         syntax: types_1.Syntax.JS,
         template: react_redux_reselect_js_1.default,
-        fileType: types_1.File.JS
+        fileType: types_1.File.JS,
+        defaultFileName: 'selectors'
     },
     {
         alias: 'react-redux-selectors-js',
@@ -202,7 +204,8 @@ exports.templateOptions = [
         shape: types_1.Shape.FUNCTION,
         syntax: types_1.Syntax.JS,
         template: react_redux_toolkit_js_1.default,
-        fileType: types_1.File.JS
+        fileType: types_1.File.JS,
+        defaultFileName: 'slice'
     },
     {
         alias: 'react-redux-toolkit-ts',
@@ -211,7 +214,8 @@ exports.templateOptions = [
         shape: types_1.Shape.FUNCTION,
         syntax: types_1.Syntax.TS,
         template: react_redux_toolkit_ts_1.default,
-        fileType: types_1.File.TS
+        fileType: types_1.File.TS,
+        defaultFileName: 'slice'
     },
     {
         alias: 'react-test-lib-jest-js',
