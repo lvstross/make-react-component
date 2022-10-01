@@ -20,6 +20,7 @@ const react_redux_reducers_js_1 = __importDefault(require("./react-redux-reducer
 const react_redux_reducers_ts_1 = __importDefault(require("./react-redux-reducers-ts"));
 const react_redux_reselect_js_1 = __importDefault(require("./react-redux-reselect-js"));
 const react_redux_selectors_js_1 = __importDefault(require("./react-redux-selectors-js"));
+const react_redux_selectors_test_js_1 = __importDefault(require("./react-redux-selectors-test-js"));
 const react_redux_selectors_ts_1 = __importDefault(require("./react-redux-selectors-ts"));
 const react_redux_toolkit_js_1 = __importDefault(require("./react-redux-toolkit-js"));
 const react_redux_toolkit_ts_1 = __importDefault(require("./react-redux-toolkit-ts"));
@@ -173,6 +174,16 @@ exports.templateOptions = [
         template: react_redux_selectors_js_1.default,
         fileType: types_1.File.JS,
         defaultFileName: 'selectors'
+    },
+    {
+        alias: 'react-redux-selectors-test-js',
+        description: 'Test file for redux selectors',
+        platform: types_1.Platform.SHARED,
+        shape: types_1.Shape.MIXED,
+        syntax: types_1.Syntax.JS,
+        template: react_redux_selectors_test_js_1.default,
+        fileType: types_1.File.JS,
+        defaultFileName: 'selectors.test'
     },
     {
         alias: 'react-redux-selectors-ts',

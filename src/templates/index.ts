@@ -14,6 +14,7 @@ import reactReduxReducersJs from './react-redux-reducers-js';
 import reactReduxReducersTs from './react-redux-reducers-ts';
 import reactReduxReselectJs from './react-redux-reselect-js';
 import reactReduxSelectorsJs from './react-redux-selectors-js';
+import reactReduxSelectorsTestJs from './react-redux-selectors-test-js';
 import reactReduxSelectorsTs from './react-redux-selectors-ts';
 import reactReduxToolkitJs from './react-redux-toolkit-js';
 import reactReduxToolkitTs from './react-redux-toolkit-ts';
@@ -168,6 +169,16 @@ export const templateOptions: TemplateOption[] = [
         template: reactReduxSelectorsJs,
         fileType: File.JS,
         defaultFileName: 'selectors'
+    },
+    {
+        alias: 'react-redux-selectors-test-js',
+        description: 'Test file for redux selectors',
+        platform: Platform.SHARED,
+        shape: Shape.MIXED,
+        syntax: Syntax.JS,
+        template: reactReduxSelectorsTestJs,
+        fileType: File.JS,
+        defaultFileName: 'selectors.test'
     },
     {
         alias: 'react-redux-selectors-ts',
