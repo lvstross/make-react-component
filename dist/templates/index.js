@@ -123,7 +123,8 @@ exports.templateOptions = [
         shape: types_1.Shape.MIXED,
         syntax: types_1.Syntax.JS,
         template: react_redux_actions_js_1.default,
-        fileType: types_1.File.JS
+        fileType: types_1.File.JS,
+        defaultFileName: 'actions'
     },
     {
         alias: 'react-redux-legacy-js',
@@ -141,7 +142,8 @@ exports.templateOptions = [
         shape: types_1.Shape.MIXED,
         syntax: types_1.Syntax.JS,
         template: react_redux_reducers_js_1.default,
-        fileType: types_1.File.JS
+        fileType: types_1.File.JS,
+        defaultFileName: 'reducers'
     },
     {
         alias: 'react-redux-reducers-ts',
@@ -150,7 +152,8 @@ exports.templateOptions = [
         shape: types_1.Shape.MIXED,
         syntax: types_1.Syntax.TS,
         template: react_redux_reducers_ts_1.default,
-        fileType: types_1.File.TS
+        fileType: types_1.File.TS,
+        defaultFileName: 'reducers'
     },
     {
         alias: 'react-redux-reselect-js',
@@ -168,7 +171,8 @@ exports.templateOptions = [
         shape: types_1.Shape.MIXED,
         syntax: types_1.Syntax.JS,
         template: react_redux_selectors_js_1.default,
-        fileType: types_1.File.JS
+        fileType: types_1.File.JS,
+        defaultFileName: 'selectors'
     },
     {
         alias: 'react-redux-selectors-ts',
@@ -177,7 +181,8 @@ exports.templateOptions = [
         shape: types_1.Shape.MIXED,
         syntax: types_1.Syntax.TS,
         template: react_redux_selectors_ts_1.default,
-        fileType: types_1.File.TS
+        fileType: types_1.File.TS,
+        defaultFileName: 'selectors'
     },
     {
         alias: 'react-redux-toolkit-js',
@@ -204,6 +209,7 @@ exports.templateOptions = [
         shape: types_1.Shape.FUNCTION,
         syntax: types_1.Syntax.JS,
         template: react_test_lib_jest_js_1.default,
-        fileType: types_1.File.JS
+        fileType: types_1.File.JS,
+        defaultFileName: 'component.test'
     }
 ];

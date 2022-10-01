@@ -21,6 +21,7 @@ import {
   Arguments,
   ConfirmationPromptAnswer,
   FilterOption,
+  NameFilePromptAnswer,
   SelectionPromptAnswer,
   TemplateOption,
   TemplateOptionAlias
@@ -95,9 +96,18 @@ import {
         type: 'confirm'
       }
     ]);
+
+    const name: NameFilePromptAnswer = await inquirer.prompt([
+      {
+        name: 'filename',
+        message: 'What would you like to name your file?',
+        default: selectedTemplateOption?.defaultFileName || 'component',
+        type: 'input'
+      }
+    ]);
     
     if (confirmation.okay) {
-      generateFile(selectedTemplateOption || templateOptions[0]);
+      generateFile(selectedTemplateOption || templateOptions[0], name.filename);
       logSuccess(`${selectedTemplateOption?.alias} generated!`);
       break;
     }

@@ -118,7 +118,8 @@ export const templateOptions: TemplateOption[] = [
         shape: Shape.MIXED,
         syntax: Syntax.JS,
         template: reactReduxActionsJs,
-        fileType: File.JS
+        fileType: File.JS,
+        defaultFileName: 'actions'
     },
     {
         alias: 'react-redux-legacy-js',
@@ -136,7 +137,8 @@ export const templateOptions: TemplateOption[] = [
         shape: Shape.MIXED,
         syntax: Syntax.JS,
         template: reactReduxReducersJs,
-        fileType: File.JS
+        fileType: File.JS,
+        defaultFileName: 'reducers'
     },
     {
         alias: 'react-redux-reducers-ts',
@@ -145,7 +147,8 @@ export const templateOptions: TemplateOption[] = [
         shape: Shape.MIXED,
         syntax: Syntax.TS,
         template: reactReduxReducersTs,
-        fileType: File.TS
+        fileType: File.TS,
+        defaultFileName: 'reducers'
     },
     {
         alias: 'react-redux-reselect-js',
@@ -163,7 +166,8 @@ export const templateOptions: TemplateOption[] = [
         shape: Shape.MIXED,
         syntax: Syntax.JS,
         template: reactReduxSelectorsJs,
-        fileType: File.JS
+        fileType: File.JS,
+        defaultFileName: 'selectors'
     },
     {
         alias: 'react-redux-selectors-ts',
@@ -172,7 +176,8 @@ export const templateOptions: TemplateOption[] = [
         shape: Shape.MIXED,
         syntax: Syntax.TS,
         template: reactReduxSelectorsTs,
-        fileType: File.TS
+        fileType: File.TS,
+        defaultFileName: 'selectors'
     },
     {
         alias: 'react-redux-toolkit-js',
@@ -199,6 +204,7 @@ export const templateOptions: TemplateOption[] = [
         shape: Shape.FUNCTION,
         syntax: Syntax.JS,
         template: reactTestLibJestJs,
-        fileType: File.JS
+        fileType: File.JS,
+        defaultFileName: 'component.test'
     }
 ];

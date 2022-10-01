@@ -34,7 +34,7 @@ export const parseTemplateOption = (tempOpt: string): TemplateOptionAlias | unde
 export const generateFile = (temp: TemplateOption, fileName?: string): void => {
   if (!isEmpty(temp.alias)) {
     const dirPath = getDirPath();
-    writeFileSync(`${dirPath}/${fileName || 'Component'}.${temp.fileType}`, temp.template);
+    writeFileSync(`${dirPath}/${fileName || 'component'}.${temp.fileType}`, temp.template);
   } else {
     logError('No template match');
   }

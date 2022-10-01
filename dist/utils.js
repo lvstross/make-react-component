@@ -33,7 +33,7 @@ exports.parseTemplateOption = parseTemplateOption;
 const generateFile = (temp, fileName) => {
     if (!(0, isEmpty_1.default)(temp.alias)) {
         const dirPath = (0, exports.getDirPath)();
-        (0, fs_1.writeFileSync)(`${dirPath}/${fileName || 'Component'}.${temp.fileType}`, temp.template);
+        (0, fs_1.writeFileSync)(`${dirPath}/${fileName || 'component'}.${temp.fileType}`, temp.template);
     }
     else {
         (0, exports.logError)('No template match');

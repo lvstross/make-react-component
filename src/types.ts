@@ -6,6 +6,10 @@ export interface ConfirmationPromptAnswer {
   okay: boolean;
 }
 
+export interface NameFilePromptAnswer {
+  filename: string;
+}
+
 export enum FilterOption {
   WEB = 'web',
   MOBILE = 'mobile',
@@ -56,4 +60,5 @@ export interface TemplateOption {
   syntax: Syntax;
   template: string;
   fileType: File;
+  defaultFileName?: string;
 }

@@ -72,8 +72,16 @@ const templates_1 = require("./templates");
                 type: 'confirm'
             }
         ]);
+        const name = yield inquirer_1.default.prompt([
+            {
+                name: 'filename',
+                message: 'What would you like to name your file?',
+                default: (selectedTemplateOption === null || selectedTemplateOption === void 0 ? void 0 : selectedTemplateOption.defaultFileName) || 'component',
+                type: 'input'
+            }
+        ]);
         if (confirmation.okay) {
-            (0, utils_1.generateFile)(selectedTemplateOption || templates_1.templateOptions[0]);
+            (0, utils_1.generateFile)(selectedTemplateOption || templates_1.templateOptions[0], name.filename);
             (0, utils_1.logSuccess)(`${selectedTemplateOption === null || selectedTemplateOption === void 0 ? void 0 : selectedTemplateOption.alias} generated!`);
             break;
         }
