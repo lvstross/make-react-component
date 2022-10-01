@@ -6,7 +6,7 @@ jest.mock('my/module', () => ({
   someModuleExport: jest.fn()
 }));
 
-describe(('test one') => {
+describe('test one', () => {
   const props = {
     onButtonClick: jest.fn()
   };
