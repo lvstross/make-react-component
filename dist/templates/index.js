@@ -25,6 +25,8 @@ const react_redux_selectors_ts_1 = __importDefault(require("./react-redux-select
 const react_redux_toolkit_js_1 = __importDefault(require("./react-redux-toolkit-js"));
 const react_redux_toolkit_ts_1 = __importDefault(require("./react-redux-toolkit-ts"));
 const react_test_lib_jest_js_1 = __importDefault(require("./react-test-lib-jest-js"));
+const react_use_context_js_1 = __importDefault(require("./react-use-context-js"));
+const react_use_context_ts_1 = __importDefault(require("./react-use-context-ts"));
 const types_1 = require("../types");
 exports.templateOptions = [
     {
@@ -226,5 +228,25 @@ exports.templateOptions = [
         template: react_test_lib_jest_js_1.default,
         fileType: types_1.File.JS,
         defaultFileName: 'component.test'
+    },
+    {
+        alias: 'react-use-context-js',
+        description: 'React useContext for state management example',
+        platform: types_1.Platform.SHARED,
+        shape: types_1.Shape.MIXED,
+        syntax: types_1.Syntax.JS,
+        template: react_use_context_js_1.default,
+        fileType: types_1.File.JSX,
+        defaultFileName: 'StateProvider'
+    },
+    {
+        alias: 'react-use-context-ts',
+        description: 'React useContext for state management example in typescript',
+        platform: types_1.Platform.SHARED,
+        shape: types_1.Shape.MIXED,
+        syntax: types_1.Syntax.TS,
+        template: react_use_context_ts_1.default,
+        fileType: types_1.File.TSX,
+        defaultFileName: 'StateProvider'
     }
 ];

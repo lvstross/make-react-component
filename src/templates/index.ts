@@ -19,6 +19,8 @@ import reactReduxSelectorsTs from './react-redux-selectors-ts';
 import reactReduxToolkitJs from './react-redux-toolkit-js';
 import reactReduxToolkitTs from './react-redux-toolkit-ts';
 import reactTestLibJestJs from './react-test-lib-jest-js';
+import reactUseContextJs from './react-use-context-js';
+import reactUseContextTs from './react-use-context-ts';
 import { TemplateOption, Platform, Shape, Syntax, File } from '../types';
 
 export const templateOptions: TemplateOption[] = [
@@ -221,5 +223,25 @@ export const templateOptions: TemplateOption[] = [
         template: reactTestLibJestJs,
         fileType: File.JS,
         defaultFileName: 'component.test'
+    },
+    {
+        alias: 'react-use-context-js',
+        description: 'React useContext for state management example',
+        platform: Platform.SHARED,
+        shape: Shape.MIXED,
+        syntax: Syntax.JS,
+        template: reactUseContextJs,
+        fileType: File.JSX,
+        defaultFileName: 'StateProvider'
+    },
+    {
+        alias: 'react-use-context-ts',
+        description: 'React useContext for state management example in typescript',
+        platform: Platform.SHARED,
+        shape: Shape.MIXED,
+        syntax: Syntax.TS,
+        template: reactUseContextTs,
+        fileType: File.TSX,
+        defaultFileName: 'StateProvider'
     }
 ];

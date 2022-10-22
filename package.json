@@ -8,7 +8,7 @@
     "start": "ts-node ./src/index.ts",
     "build": "rm -rf dist && tsc -p .",
     "lint": "eslint src --ext .ts",
-    "bin:up": "npm run build && npm link",
+    "bin:up": "npm run build && sudo npm link",
     "bin:down": "bash scripts/binDown.sh makeReact",
     "bin": "npm run bin:down && npm run bin:up"
   },
